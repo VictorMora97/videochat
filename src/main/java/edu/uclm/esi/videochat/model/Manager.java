@@ -61,6 +61,7 @@ public class Manager {
 			user.setPwd(null);
 			users.add(user);
 		}
+		//users.remove(0);
 		return users;
 	}
 

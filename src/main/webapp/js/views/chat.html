@@ -7,7 +7,7 @@
 	<div class="oj-applayout-content">
 		<div role="main" class="oj-hybrid-applayout-content">
 			<div class="oj-hybrid-padding">
-				<h1>Fantástico videochat</h1>
+				<h1>Fantastico videochat</h1>
 				<span data-bind="html : estadoChatDeTexto"></span> - <span data-bind="html : estadoSignaling"></span><br>
 				<strong data-bind="html : errorChatDeTexto" style="color : red"></strong> -  <strong data-bind="html : errorSignaling" style="color : red"></strong>
 	
@@ -26,8 +26,8 @@
 				<!-- /ko -->
 
 				<div class="oj-sm-12">
-					<button data-bind="click : encenderVideoLocal">Encender vídeo local</button>
-					<button data-bind="click : crearConexion">Crear conexión</button>
+					<button data-bind="click : encenderVideoLocal">Encender video local</button>
+					<button data-bind="click : crearConexion">Crear conexion</button>
 				</div>
 				
 				<!-- ko with : chat -->
@@ -74,15 +74,15 @@
 	
 								<!-- ko foreach : mensajes -->
 								<div>
-									<span data-bind="html : hora"></span>:
-									<span data-bind="html : texto"></span>
+									<span data-bind="html : $data.hora"></span>:
+									<span data-bind="html : $data.texto"></span>
 								</div>
 								<!-- /ko -->
 							</div>
 							<!-- /ko -->
 						</div>
 						<div class="oj-sm-4">
-							<h4>Mensajes de conexión</h4>
+							<h4>Mensajes de conexion</h4>
 							<!-- ko with : $parents[$parents.length-1].videoChat -->
 								<!-- ko foreach : mensajes -->
 								<div data-bind="html : texto, style : { color :  color }"></div>
@@ -90,7 +90,7 @@
 							<!-- /ko -->
 						</div>
 						<div class="oj-sm-4">
-							<h4>Zona de vídeo</h4>
+							<h4>Zona de video</h4>
 							<video id="widgetVideoLocal" playsinline autoplay controls mute width="200" height="200"></video>
 							<video id="widgetVideoRemoto" playsinline autoplay controls width="200" height="200"></video>	
 						</div>

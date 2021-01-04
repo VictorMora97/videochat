@@ -83,4 +83,23 @@ public class User {
 	public Long getSetConfirmationDate() {
 		return confirmationDate;
 	}
+	
+	
+	
+//
+//	public void setSessionDeVideo(WebSocketSession session) {
+//		//hecho automaticamente desde websocketsignaling
+//		this.session = session;
+//		
+//	}
+
+	public void setSessionDeTexto(WebSocketSession session) {
+		//hecho automaticamente desde websocketsignaling
+		this.session = session;
+		
+	}
+	
+	
+	
+	
 }

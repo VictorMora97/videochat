@@ -53,8 +53,8 @@ public class TestRegistro {
 	
 	@Before
 	public void setUp() throws Exception {
-		System.setProperty("webdriver.chrome.driver", "/Users/macariopolousaola/chromedriver");
-		System.setProperty("webdriver.gecko.driver", "/Users/macariopolousaola/geckodriver");
+		System.setProperty("webdriver.chrome.driver", "/PATH/chromedriver");
+		System.setProperty("webdriver.gecko.driver", "/PATH/geckodriver");
 				
 		//cargarCaras();
 	}

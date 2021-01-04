@@ -17,8 +17,8 @@ public class Email {
 		String smtpHost= "smtp.office365.com";
 		String startTTLS="true";
 		String port="587";
-		String sender="macario.polo@uclm.es";		// REMITENTE
-		String serverUser="macario.polo@uclm.es";	// USUARIO
+		String sender="VictorMiguel.Mora@alu.uclm.es";		// REMITENTE
+		String serverUser="VictorMiguel.Mora@alu.uclm.es";	// USUARIO
 		String userAutentication= "true";
 		String pwd="********";				// PONER LA CONTRASEÑA
 		String fallback="true";	
@@ -70,7 +70,7 @@ public class Email {
 	
 	public static void main(String[] args) throws Exception {
 		Email sender=new Email();
-		sender.send("macario.polo@uclm.es", "Hola", "Caracola");
+		sender.send("VictorMiguel.Mora@alu.uclm.es", "Hola", "Caracola");
 		System.out.println("Enviado");
 	}
 }
