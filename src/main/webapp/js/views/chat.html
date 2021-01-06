@@ -1,4 +1,4 @@
-<div class="oj-hybrid-applayout-page">
+<div class="oj-hybrid-applayout-page" >
 	<div class="oj-applayout-fixed-top">
 		<header role="banner" class="oj-hybrid-applayout-header">
 			<oj-module config="[[headerConfig]]"></oj-module>
@@ -8,8 +8,10 @@
 		<div role="main" class="oj-hybrid-applayout-content">
 			<div class="oj-hybrid-padding">
 				<h1>Fantastico videochat</h1>
-				<span data-bind="html : estadoChatDeTexto"></span> - <span data-bind="html : estadoSignaling"></span><br>
-				<strong data-bind="html : errorChatDeTexto" style="color : red"></strong> -  <strong data-bind="html : errorSignaling" style="color : red"></strong>
+				<!-- <span data-bind="html : estadoChatDeTexto"></span> - <span data-bind="html : estadoSignaling"></span> -->
+				
+				<br>
+				<!-- <strong data-bind="html : errorChatDeTexto" style="color : red"></strong> -  <strong data-bind="html : errorSignaling" style="color : red"></strong> -->
 	
 				<!-- ko with : user -->
 				<div class="oj-sm-12">
@@ -25,10 +27,10 @@
 				</div>
 				<!-- /ko -->
 
-				<div class="oj-sm-12">
+<!-- 				<div class="oj-sm-12">
 					<button data-bind="click : encenderVideoLocal">Encender video local</button>
 					<button data-bind="click : crearConexion">Crear conexion</button>
-				</div>
+				</div> -->
 				
 				<!-- ko with : chat -->
 					<div class="oj-sm-12 oj-flex">

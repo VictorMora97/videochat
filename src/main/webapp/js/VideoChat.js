@@ -66,23 +66,23 @@ class VideoChat {
 	}
 	
 	aceptarLlamada(remitente, sessionDescription) {
-		if (!this.videoLocalOn)
-			this.encenderVideoLocal();
-		
-		if (!this.conexion)
-			this.crearConexion();
+		let self = this;
+			self.encenderVideoLocal();			
+			setTimeout(function(){
+				self.crearConexion();
+				//self.addMensaje("CONTROL DE MENSAJES2");		
 		
 		let rtcSessionDescription = new RTCSessionDescription(sessionDescription);
-		this.addMensaje("Añadiendo sessionDescription a la remoteDescription", "grey");
-		this.conexion.setRemoteDescription(rtcSessionDescription);
-		this.addMensaje("sessionDescription añadida a la remoteDescription", "grey");
+		self.addMensaje("Añadiendo sessionDescription a la remoteDescription", "grey");
+		self.conexion.setRemoteDescription(rtcSessionDescription);
+		self.addMensaje("sessionDescription añadida a la remoteDescription", "grey");
 					
-		this.addMensaje("Llamada aceptada", "black");
-		this.addMensaje("Creando respuesta mediante el servidor Stun");
+		self.addMensaje("Llamada aceptada", "black");
+		self.addMensaje("Creando respuesta mediante el servidor Stun");
 		
 		let sdpConstraints = {};
-		let self = this;
-		this.conexion.createAnswer(
+		// let self = this;
+		self.conexion.createAnswer(
 			function(sessionDescription) {
 				self.addMensaje("sessionDescription recibida del servidor stun");
 				self.conexion.setLocalDescription(sessionDescription).then(
@@ -102,7 +102,8 @@ class VideoChat {
 				self.addMensaje("Error al crear oferta en el servidor Stun: " + error, red);
 			},
 			sdpConstraints
-		);
+		);  
+			},1500);	
 	}
 	
 	rechazarLlamada(remitente, sessionDescription) {
@@ -137,7 +138,7 @@ class VideoChat {
 		let self = this;
 		let servers = { 
 			iceServers : [ 
-				//{ "url" : "stun:stun.1.google.com:19302" }
+				// { "url" : "stun:stun.1.google.com:19302" }
 				{ 
 					urls : "turn:localhost",
 					username : "webrtc",
@@ -202,8 +203,16 @@ class VideoChat {
 	enviarOferta(destinatario) {
 		let self = this;
 		let sdpConstraints = {};
-		this.addMensaje("Creando oferta en el servidor Stun");
-		this.conexion.createOffer(
+		
+		self.encenderVideoLocal();
+		// self.addMensaje("CONTROL DE MENSAJES1");
+		
+		setTimeout(function(){
+			self.crearConexion();
+			// self.addMensaje("CONTROL DE MENSAJES2");
+		
+		self.addMensaje("Creando oferta en el servidor Stun");
+		self.conexion.createOffer(
 			function(sessionDescription) {
 				self.addMensaje("sessionDescription recibida del servidor Stun");
 				self.conexion.setLocalDescription(sessionDescription);
@@ -222,6 +231,11 @@ class VideoChat {
 			},
 			sdpConstraints
 		);
+		
+		
+		},1500);
+		
+		
 	}
 
 	addMensaje(texto, color) {
