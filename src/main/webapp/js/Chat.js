@@ -35,9 +35,28 @@ class Chat {
 			if (data.type == "FOR ALL") {
 				var mensaje = new Mensaje(data.message, data.time);
 				self.mensajesRecibidos.push(mensaje);
+				
+				
+				
+				
 			} else if (data.type == "ARRIVAL") {
+					
+		        //lo que habia antes
+//				var usuario = new Usuario(data.userName, data.picture);
+//				self.usuarios.push(usuario);			
+
+				var userName = data.userName;
+				//añadido: evitar redundancia de usuarios	
+				for (var i=0; i<self.usuarios().length; i++) {
+					if (self.usuarios()[i].nombre == userName) {
+						self.usuarios.splice(i, 1);
+						break;
+					}
+				}		
+				
 				var usuario = new Usuario(data.userName, data.picture);
-				self.usuarios.push(usuario);
+				self.usuarios.push(usuario);		
+				
 			} else if (data.type == "BYE") {
 				var userName = data.userName;
 				for (var i=0; i<self.usuarios().length; i++) {
