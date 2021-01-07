@@ -32,10 +32,19 @@ class VideoChat {
 
 		this.ws.onmessage = function(event) {
 			var data = JSON.parse(event.data);
+			
 			if (data.type=="OFFER") {
 				self.anunciarLlamada(data.remitente, data.sessionDescription);
 				return;
 			}
+			
+			
+			if (data.type=="RECHAZO") {
+				self.anunciarRechazo(data.remitente, data.sessionDescription);
+				return;
+			}
+			
+			
 			if (data.type=="CANDIDATE" && data.candidate) {
 				self.addMensaje("Recibido candidato desde Signaling", "blue");
 				try {
@@ -62,15 +71,84 @@ class VideoChat {
 		if (aceptar)
 			this.aceptarLlamada(remitente, sessionDescription);
 		else
-			this.rechazarLlamada(remitente, sessionDescription);			
+			this.enviarRechazo(remitente, sessionDescription);			
 	}
+	
+	anunciarRechazo(remitente, sessionDescription) {
+		this.addMensaje(remitente + " ha rechazado la llamada", "black");
+		window.alert(remitente+" ha rechazado la llamada");
+	}
+	
+	
+	
+	
+	enviarRechazo(remitente) {
+		let self = this;
+		let sdpConstraints = {};
+		
+		self.encenderVideoLocal();
+		// self.addMensaje("CONTROL DE MENSAJES1");
+		
+		setTimeout(function(){
+			self.crearConexion();
+			// self.addMensaje("CONTROL DE MENSAJES2");
+		
+		
+		self.conexion.createOffer(
+			function(sessionDescription) {
+				
+				self.conexion.setLocalDescription(sessionDescription);
+				
+				
+				let msg = {
+					type : "RECHAZO",
+					sessionDescription : sessionDescription,
+					recipient : remitente
+				};
+				self.ws.send(JSON.stringify(msg));
+				self.addMensaje("Oferta enviada al servidor de signaling");
+			},
+			function(error) {
+				self.addMensaje("Error al crear oferta en el servidor Stun", true);
+			},
+			sdpConstraints
+		);
+		
+		
+		},1500);
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	aceptarLlamada(remitente, sessionDescription) {
 		let self = this;
 			self.encenderVideoLocal();			
 			setTimeout(function(){
 				self.crearConexion();
-				//self.addMensaje("CONTROL DE MENSAJES2");		
+				// self.addMensaje("CONTROL DE MENSAJES2");
 		
 		let rtcSessionDescription = new RTCSessionDescription(sessionDescription);
 		self.addMensaje("Añadiendo sessionDescription a la remoteDescription", "grey");
@@ -106,10 +184,34 @@ class VideoChat {
 			},1500);	
 	}
 	
-	rechazarLlamada(remitente, sessionDescription) {
-		this.addMensaje("Llamada de " + remitente + " rechazada");
-		this.addMensaje("Implementar función rechazarLlamada", "red");
-	}
+	
+	
+	
+	
+	
+	
+//	
+// rechazarLlamada(remitente, sessionDescription) {
+// this.addMensaje("Llamada de " + remitente + " rechazada");
+// this.addMensaje("Implementar función rechazarLlamada", "red");
+//
+// let msg = {
+// type : "OFFER",
+// sessionDescription : sessionDescription,
+// recipient : remitente
+// };
+// self.ws.send(JSON.stringify(msg));
+//		
+//		
+// window.alert("LLAMADA RECHAZADA, REMITENTE: " + remitente);
+// }
+//	
+	
+
+	
+	
+	
+	
 	
 	encenderVideoLocal() {
 		let self = this;
