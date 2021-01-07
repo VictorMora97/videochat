@@ -10,6 +10,8 @@ class VideoChat {
 		this.estado = ko.observable("No conectado");
 		this.error = ko.observable();
 		
+		var zonaVideo = document.getElementById("zonaVideo");
+		
 		this.ws = new WebSocket("wss://" + window.location.host + "/wsSignaling");
 		
 		this.ws.onopen = function() {
@@ -76,9 +78,9 @@ class VideoChat {
 	
 	anunciarRechazo(remitente, sessionDescription) {
 		this.addMensaje(remitente + " ha rechazado la llamada", "black");
+		zonaVideo.style.display = 'none';
 		window.alert(remitente+" ha rechazado la llamada");
 	}
-	
 	
 	
 	
@@ -115,7 +117,7 @@ class VideoChat {
 		);
 		
 		
-		},1500);
+		},2000);
 		
 		
 	}
@@ -123,28 +125,10 @@ class VideoChat {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	aceptarLlamada(remitente, sessionDescription) {
+		zonaVideo.style.display = 'block';
 		let self = this;
+		// self.zonaVideo = ko.observable(true);
 			self.encenderVideoLocal();			
 			setTimeout(function(){
 				self.crearConexion();
@@ -181,14 +165,10 @@ class VideoChat {
 			},
 			sdpConstraints
 		);  
-			},1500);	
+			},2000);	
 	}
 	
-	
-	
-	
-	
-	
+
 	
 //	
 // rechazarLlamada(remitente, sessionDescription) {
@@ -206,13 +186,7 @@ class VideoChat {
 // window.alert("LLAMADA RECHAZADA, REMITENTE: " + remitente);
 // }
 //	
-	
 
-	
-	
-	
-	
-	
 	encenderVideoLocal() {
 		let self = this;
 		
@@ -302,10 +276,16 @@ class VideoChat {
 		}
 	}	
 	
+	
+	
 	enviarOferta(destinatario) {
+
+		zonaVideo.style.display = 'block';
+		
 		let self = this;
 		let sdpConstraints = {};
 		
+		// self.zonaVideo = ko.observable(true);
 		self.encenderVideoLocal();
 		// self.addMensaje("CONTROL DE MENSAJES1");
 		
