@@ -1,8 +1,9 @@
 class Chat {
+	
 	constructor(ko) {
 		let self = this;
 		this.ko = ko;
-		
+				
 		this.estado = ko.observable("");
 		this.error = ko.observable();
 		
@@ -12,6 +13,8 @@ class Chat {
 		
 		this.destinatario = ko.observable();
 		this.mensajeQueVoyAEnviar = ko.observable();
+		
+		var zonaVideo = document.getElementById("zonaVideo");
 		
 		this.chat = new WebSocket("wss://" + window.location.host + "/wsTexto");
 		
@@ -34,10 +37,7 @@ class Chat {
 			var data = JSON.parse(event.data);
 			if (data.type == "FOR ALL") {
 				var mensaje = new Mensaje(data.message, data.time);
-				self.mensajesRecibidos.push(mensaje);
-				
-				
-				
+				self.mensajesRecibidos.push(mensaje);			
 				
 			} else if (data.type == "ARRIVAL") {
 					
@@ -85,6 +85,12 @@ class Chat {
 		this.chat.close();
 	}
 	
+//	acabarLlamada(){
+//		
+//		zonaVideo.style.display = 'none';
+//	}
+//	
+	
 	enviar(mensaje) {
 		this.chat.send(JSON.stringify(mensaje));
 	}
@@ -95,7 +101,36 @@ class Chat {
 			message : this.mensajeQueVoyAEnviar()
 		};
 		this.chat.send(JSON.stringify(mensaje));
+		//this.registerMsg(mensaje);
 	}
+
+	
+//	registerMsg(mensaje) {
+//		var info = {
+//			id : "prueba",
+//			date : "prueba",//self.date,
+//			message : "prueba",    //self.message,
+//			recipient : "prueba",    //self.recipient,
+//			sender : "prueba"    //self.sender
+//			//picture : self.picture()
+//		};
+//		var data = {
+//				data : JSON.stringify(mensaje),
+//				url : "messages/msgBroadcast",
+//				type : "put",
+//				contentType : 'application/json',
+//				success : function(response) {
+//					alert("Mensaje guardado correctamente");
+//					
+//				},
+//				error : function(response) {
+//					alert("ERROR GUARDANDO MSG " + response.responseJSON.error);
+//				}
+//		};
+//		$.ajax(data);    	  
+//	}
+//	
+
 	
 	buscarConversacion(nombreInterlocutor) {
 		for (var i=0; i<this.conversaciones().length; i++) {

@@ -83,7 +83,6 @@ class VideoChat {
 	}
 	
 	
-	
 	enviarRechazo(remitente) {
 		let self = this;
 		let sdpConstraints = {};

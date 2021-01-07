@@ -36,14 +36,10 @@ public class WebSocketTexto extends WebSocketVideoChat {
 		this.sessionsByUserName.put(user.getName(), wrapper);
 		this.sessionsById.put(session.getId(), wrapper);
 		
-		System.out.println(user.getName()+ ">>> Sesion de texto "+session.getId());
+		System.out.println(user.getName()+ "ID Sesion de texto: "+session.getId());
 	}
 	
-	
-	
-	
-	
-	
+
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		JSONObject jso = new JSONObject(message.getPayload());
 		String type = jso.getString("type");
@@ -78,7 +74,8 @@ public class WebSocketTexto extends WebSocketVideoChat {
 	}
 
 	private void guardarMensaje(Message mensaje) {
-		Manager.get().getMessageRepo().save(mensaje);	
+		Manager.get().getMessageRepo().save(mensaje);
+		//Message.gegetMessageRepo()
 	}
 
 	@Override

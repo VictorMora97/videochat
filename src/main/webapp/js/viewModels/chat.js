@@ -68,6 +68,47 @@ define(['knockout', 'appController', 'ojs/ojmodule-element-utils', 'accUtils'],
 		self.transitionCompleted = function() {
 			// Implement if needed
 		};
+		
+		self.registerMsg = function(){
+			self.chat().registerMsg();
+		};
+		
+		
+		
+		
+		
+		
+//		self.registerMsg = function() {
+//			var info = {
+//				date : self.name(),
+//				message : self.email(),
+//				recipient : self.pwd1(),
+//				sender : self.pwd2()
+//				//picture : self.picture()
+//			};
+//			var data = {
+//					data : JSON.stringify(info),
+//					url : "messages/msgBroadcast",
+//					type : "put",
+//					contentType : 'application/json',
+//					success : function(response) {
+//						alert("Mensaje guardado correctamente");
+//						
+//					},
+//					error : function(response) {
+//						alert("Error: " + response.responseJSON.error);
+//					}
+//			};
+//			$.ajax(data);    	  
+//		}
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 
 	return ChatViewModel;
