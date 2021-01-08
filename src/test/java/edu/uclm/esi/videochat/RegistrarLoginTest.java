@@ -60,7 +60,7 @@ public class RegistrarLoginTest {
 
 	@After
 	public void tearDown() {
-		chrome.quit();
+		//chrome.quit();
 	}
 	
 	
@@ -99,7 +99,7 @@ public class RegistrarLoginTest {
 		assertThat(chrome.switchTo().alert().getText(), is("Registrado correctamente"));
 		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		chrome.switchTo().alert().accept();
-
+		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		WebElement loginNombre = chrome.findElement(
 				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[1]/input"));
 		WebElement loginPwd = chrome.findElement(
@@ -112,7 +112,9 @@ public class RegistrarLoginTest {
 		
 		loginNombre.sendKeys("PepeSelenium");
 		loginPwd.sendKeys("123");
-		
+		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		chrome.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[3]/button")).click();
+		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		chrome.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
 	}
 	
@@ -152,7 +154,7 @@ public class RegistrarLoginTest {
 		assertThat(chrome.switchTo().alert().getText(), is("Registrado correctamente"));
 		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		chrome.switchTo().alert().accept();
-
+		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		WebElement loginNombre = chrome.findElement(
 				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[1]/input"));
 		WebElement loginPwd = chrome.findElement(
@@ -165,7 +167,9 @@ public class RegistrarLoginTest {
 		
 		loginNombre.sendKeys("AnaSelenium");
 		loginPwd.sendKeys("123");
-		
+		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		chrome.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[3]/button")).click();
+		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		chrome.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
 
 	}
@@ -177,6 +181,7 @@ public class RegistrarLoginTest {
 	public void registrarLoginLucas() {
 
 		usersRepo.delete(usersRepo.findByName("LucasSelenium"));
+		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		chrome.get("https://localhost:7500/?ojr=register");
 
 		chrome.findElement(By.id("details-button")).click();
@@ -196,6 +201,7 @@ public class RegistrarLoginTest {
 		cajaEmail.sendKeys("LucasSelenium@gmail.com");
 		cajaPwd1.sendKeys("123");
 		cajaPwd2.sendKeys("123");
+		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		chrome.findElement(By.xpath("/html/body/div/oj-module/div[1]/div[2]/div/div/div/button")).click();
 		WebElement botonCrearCuenta = chrome.findElement(By.id("btnCrearCuenta"));
 
@@ -204,7 +210,7 @@ public class RegistrarLoginTest {
 		assertThat(chrome.switchTo().alert().getText(), is("Registrado correctamente"));
 		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		chrome.switchTo().alert().accept();
-
+		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		WebElement loginNombre = chrome.findElement(
 				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[1]/input"));
 		WebElement loginPwd = chrome.findElement(
@@ -217,7 +223,9 @@ public class RegistrarLoginTest {
 		
 		loginNombre.sendKeys("LucasSelenium");
 		loginPwd.sendKeys("123");
-		
+		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		chrome.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[3]/button")).click();
+		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		chrome.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
 	}
 	
