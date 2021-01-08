@@ -22,6 +22,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.annotation.Order;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Alert;
@@ -61,11 +62,16 @@ public class RegistrarLoginTest {
 	public void tearDown() {
 		chrome.quit();
 	}
+	
+	
+	
+	
 
 	@Test
-	public void registrarLogin() {
+	@Order(1)
+	public void registrarLoginPepe() {
 
-		usersRepo.delete(usersRepo.findByName("selenium97"));
+		usersRepo.delete(usersRepo.findByName("PepeSelenium"));
 		chrome.get("https://localhost:7500/?ojr=register");
 
 		chrome.findElement(By.id("details-button")).click();
@@ -80,11 +86,9 @@ public class RegistrarLoginTest {
 				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[3]"));
 		WebElement cajaPwd2 = chrome
 				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[4]"));
-		// RemoteWebElement inputFile = (RemoteWebElement)
-		// chrome.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[5]"));
 
-		cajaNombre.sendKeys("selenium97");
-		cajaEmail.sendKeys("selenium97@gmail.com");
+		cajaNombre.sendKeys("PepeSelenium");
+		cajaEmail.sendKeys("PepeSelenium@gmail.com");
 		cajaPwd1.sendKeys("123");
 		cajaPwd2.sendKeys("123");
 		chrome.findElement(By.xpath("/html/body/div/oj-module/div[1]/div[2]/div/div/div/button")).click();
@@ -96,9 +100,58 @@ public class RegistrarLoginTest {
 		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		chrome.switchTo().alert().accept();
 
-//    chrome.findElement(By.cssSelector("html")).click();
-//    chrome.findElement(By.cssSelector(".oj-sm-12:nth-child(1) > input")).sendKeys("selenium97");
-//    chrome.findElement(By.cssSelector("button")).click();
+		WebElement loginNombre = chrome.findElement(
+				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[1]/input"));
+		WebElement loginPwd = chrome.findElement(
+				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[2]/input"));
+		WebElement btnEntrar = chrome.findElement(
+				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[3]/button"));
+
+		loginNombre.clear();
+		loginPwd.clear();
+		
+		loginNombre.sendKeys("PepeSelenium");
+		loginPwd.sendKeys("123");
+		
+		chrome.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
+	}
+	
+	
+	
+	
+	
+	@Test
+	@Order(2)
+	public void registrarLoginAna() {
+
+		usersRepo.delete(usersRepo.findByName("AnaSelenium"));
+		chrome.get("https://localhost:7500/?ojr=register");
+
+		chrome.findElement(By.id("details-button")).click();
+		chrome.findElement(By.id("proceed-link")).click();
+		chrome.manage().window().setSize(new Dimension(939, 1025));
+
+		WebElement cajaNombre = chrome
+				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[1]"));
+		WebElement cajaEmail = chrome
+				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[2]"));
+		WebElement cajaPwd1 = chrome
+				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[3]"));
+		WebElement cajaPwd2 = chrome
+				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[4]"));
+
+		cajaNombre.sendKeys("AnaSelenium");
+		cajaEmail.sendKeys("AnaSelenium@gmail.com");
+		cajaPwd1.sendKeys("123");
+		cajaPwd2.sendKeys("123");
+		chrome.findElement(By.xpath("/html/body/div/oj-module/div[1]/div[2]/div/div/div/button")).click();
+		WebElement botonCrearCuenta = chrome.findElement(By.id("btnCrearCuenta"));
+
+		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+		assertThat(chrome.switchTo().alert().getText(), is("Registrado correctamente"));
+		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		chrome.switchTo().alert().accept();
 
 		WebElement loginNombre = chrome.findElement(
 				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[1]/input"));
@@ -110,11 +163,70 @@ public class RegistrarLoginTest {
 		loginNombre.clear();
 		loginPwd.clear();
 		
-		loginNombre.sendKeys("selenium97");
+		loginNombre.sendKeys("AnaSelenium");
 		loginPwd.sendKeys("123");
 		
 		chrome.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
 
-
 	}
+	
+	
+	
+	@Test
+	@Order(3)
+	public void registrarLoginLucas() {
+
+		usersRepo.delete(usersRepo.findByName("LucasSelenium"));
+		chrome.get("https://localhost:7500/?ojr=register");
+
+		chrome.findElement(By.id("details-button")).click();
+		chrome.findElement(By.id("proceed-link")).click();
+		chrome.manage().window().setSize(new Dimension(939, 1025));
+
+		WebElement cajaNombre = chrome
+				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[1]"));
+		WebElement cajaEmail = chrome
+				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[2]"));
+		WebElement cajaPwd1 = chrome
+				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[3]"));
+		WebElement cajaPwd2 = chrome
+				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[4]"));
+
+		cajaNombre.sendKeys("LucasSelenium");
+		cajaEmail.sendKeys("LucasSelenium@gmail.com");
+		cajaPwd1.sendKeys("123");
+		cajaPwd2.sendKeys("123");
+		chrome.findElement(By.xpath("/html/body/div/oj-module/div[1]/div[2]/div/div/div/button")).click();
+		WebElement botonCrearCuenta = chrome.findElement(By.id("btnCrearCuenta"));
+
+		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+		assertThat(chrome.switchTo().alert().getText(), is("Registrado correctamente"));
+		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		chrome.switchTo().alert().accept();
+
+		WebElement loginNombre = chrome.findElement(
+				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[1]/input"));
+		WebElement loginPwd = chrome.findElement(
+				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[2]/input"));
+		WebElement btnEntrar = chrome.findElement(
+				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[3]/button"));
+
+		loginNombre.clear();
+		loginPwd.clear();
+		
+		loginNombre.sendKeys("LucasSelenium");
+		loginPwd.sendKeys("123");
+		
+		chrome.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
