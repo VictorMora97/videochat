@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -49,23 +50,21 @@ public class RegistrarLoginTest {
 
 	@Before
 	public void setUp() {
-
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("use-fake-ui-for-media-stream");
+		
+		options.addArguments("--use-fake-device-for-media-stream");
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\CLASE\\Desktop\\TSW\\chromedriver.exe");
 
-		chrome = new ChromeDriver();
+		chrome = new ChromeDriver(options);
 		js = (JavascriptExecutor) chrome;
 		vars = new HashMap<String, Object>();
-
 	}
 
 	@After
 	public void tearDown() {
 		//chrome.quit();
 	}
-	
-	
-	
-	
 
 	@Test
 	@Order(1)
@@ -113,14 +112,10 @@ public class RegistrarLoginTest {
 		loginNombre.sendKeys("PepeSelenium");
 		loginPwd.sendKeys("123");
 		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		chrome.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[3]/button")).click();
+		btnEntrar.click();
 		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		chrome.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
 	}
-	
-	
-	
-	
 	
 	@Test
 	@Order(2)
@@ -168,13 +163,12 @@ public class RegistrarLoginTest {
 		loginNombre.sendKeys("AnaSelenium");
 		loginPwd.sendKeys("123");
 		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		chrome.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[3]/button")).click();
+		btnEntrar.click();
 		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		chrome.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
 
 	}
-	
-	
+
 	
 	@Test
 	@Order(3)
@@ -224,17 +218,11 @@ public class RegistrarLoginTest {
 		loginNombre.sendKeys("LucasSelenium");
 		loginPwd.sendKeys("123");
 		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		chrome.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[3]/button")).click();
+		//chrome.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[3]/button")).click();
+		btnEntrar.click();
 		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		chrome.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 }

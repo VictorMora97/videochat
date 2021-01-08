@@ -86,7 +86,7 @@ class VideoChat {
 	enviarRechazo(remitente) {
 		let self = this;
 		let sdpConstraints = {};
-		
+		zonaVideo.style.display = 'none';
 		self.encenderVideoLocal();
 		// self.addMensaje("CONTROL DE MENSAJES1");
 		
@@ -94,7 +94,7 @@ class VideoChat {
 			self.crearConexion();
 			// self.addMensaje("CONTROL DE MENSAJES2");
 		
-		
+			
 		self.conexion.createOffer(
 			function(sessionDescription) {
 				
@@ -113,8 +113,8 @@ class VideoChat {
 				self.addMensaje("Error al crear oferta en el servidor Stun", true);
 			},
 			sdpConstraints
+			
 		);
-		
 		
 		},2000);
 		
