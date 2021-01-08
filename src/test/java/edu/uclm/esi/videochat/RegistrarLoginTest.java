@@ -102,7 +102,8 @@ public class RegistrarLoginTest {
 		assertThat(chromePepe.switchTo().alert().getText(), is("Registrado correctamente"));
 
 		chromePepe.switchTo().alert().accept();
-
+		chromePepe.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		
 		WebElement loginNombre = chromePepe.findElement(
 				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[1]/input"));
 		WebElement loginPwd = chromePepe.findElement(
@@ -122,6 +123,7 @@ public class RegistrarLoginTest {
 		WebElement titulo = chromePepe
 				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
 
+		chromePepe.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		assertThat(titulo.getText(), is("Fantastico videochat"));
 		chromePepe.quit();
 	}
@@ -167,7 +169,8 @@ public class RegistrarLoginTest {
 		assertThat(chromeAna.switchTo().alert().getText(), is("Registrado correctamente"));
 
 		chromeAna.switchTo().alert().accept();
-
+		chromeAna.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		
 		WebElement loginNombre = chromeAna.findElement(
 				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[1]/input"));
 		WebElement loginPwd = chromeAna.findElement(
@@ -184,9 +187,9 @@ public class RegistrarLoginTest {
 		btnEntrar.click();
 		chromeAna.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-		WebElement titulo = chromeAna
-				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
+		WebElement titulo = chromeAna.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
 		
+		chromeAna.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		assertThat(titulo.getText(), is("Fantastico videochat"));
 		chromeAna.quit();
 	}
@@ -233,6 +236,7 @@ public class RegistrarLoginTest {
 		assertThat(chromeLucas.switchTo().alert().getText(), is("Registrado correctamente"));
 
 		chromeLucas.switchTo().alert().accept();
+		chromeLucas.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
 		WebElement loginNombre = chromeLucas.findElement(
 				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[1]/input"));
@@ -250,9 +254,9 @@ public class RegistrarLoginTest {
 		btnEntrar.click();
 		chromeLucas.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-		WebElement titulo = chromeLucas
-				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
+		WebElement titulo = chromeLucas.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
 
+		chromeLucas.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		assertThat(titulo.getText(), is("Fantastico videochat"));
 		chromeLucas.quit();
 	}
@@ -316,6 +320,19 @@ public class RegistrarLoginTest {
 		llamarAna.click();
 
 		// ana rechaza a pepe
+			
+		new WebDriverWait(chromeAna, 60).ignoring(NoAlertPresentException.class)
+		.until(ExpectedConditions.alertIsPresent());
+		
+		assertThat(chromeAna.switchTo().alert().getText(), is("Te llama PepeSelenium. ¿Contestar?\n"));
+		chromeAna.switchTo().alert().dismiss();
+		
+		new WebDriverWait(chromePepe, 60).ignoring(NoAlertPresentException.class)
+		.until(ExpectedConditions.alertIsPresent());
+		
+    	assertThat(chromePepe.switchTo().alert().getText(), is("AnaSelenium ha rechazado la llamada"));
+		chromePepe.switchTo().alert().accept();
+		
 
 	}
 
