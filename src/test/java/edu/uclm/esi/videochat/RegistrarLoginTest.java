@@ -37,11 +37,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import edu.uclm.esi.videochat.springdao.UserRepository;
+import junit.framework.Assert;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class RegistrarLoginTest {
-	private WebDriver chrome;
+	private WebDriver chromeAna;
+	private WebDriver chromeLucas;
+	private WebDriver chromePepe;
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
 
@@ -52,177 +55,205 @@ public class RegistrarLoginTest {
 	public void setUp() {
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("use-fake-ui-for-media-stream");
-		
 		options.addArguments("--use-fake-device-for-media-stream");
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\CLASE\\Desktop\\TSW\\chromedriver.exe");
 
-		chrome = new ChromeDriver(options);
-		js = (JavascriptExecutor) chrome;
+		// chrome = new ChromeDriver(options);
+
+		// js = (JavascriptExecutor) chrome;
 		vars = new HashMap<String, Object>();
 	}
 
 	@After
 	public void tearDown() {
-		//chrome.quit();
+		// chrome.quit();
 	}
 
 	@Test
 	@Order(1)
 	public void registrarLoginPepe() {
 
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("use-fake-ui-for-media-stream");
+		options.addArguments("--use-fake-device-for-media-stream");
+
+		chromePepe = new ChromeDriver(options);
+
 		usersRepo.delete(usersRepo.findByName("PepeSelenium"));
-		chrome.get("https://localhost:7500/?ojr=register");
+		chromePepe.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		chromePepe.get("https://localhost:7500/?ojr=register");
 
-		chrome.findElement(By.id("details-button")).click();
-		chrome.findElement(By.id("proceed-link")).click();
-		chrome.manage().window().setSize(new Dimension(939, 1025));
+		chromePepe.findElement(By.id("details-button")).click();
+		chromePepe.findElement(By.id("proceed-link")).click();
+		chromePepe.manage().window().setSize(new Dimension(939, 1025));
 
-		WebElement cajaNombre = chrome
+		WebElement cajaNombre = chromePepe
 				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[1]"));
-		WebElement cajaEmail = chrome
+		WebElement cajaEmail = chromePepe
 				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[2]"));
-		WebElement cajaPwd1 = chrome
+		WebElement cajaPwd1 = chromePepe
 				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[3]"));
-		WebElement cajaPwd2 = chrome
+		WebElement cajaPwd2 = chromePepe
 				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[4]"));
 
 		cajaNombre.sendKeys("PepeSelenium");
 		cajaEmail.sendKeys("PepeSelenium@gmail.com");
 		cajaPwd1.sendKeys("123");
 		cajaPwd2.sendKeys("123");
-		chrome.findElement(By.xpath("/html/body/div/oj-module/div[1]/div[2]/div/div/div/button")).click();
-		WebElement botonCrearCuenta = chrome.findElement(By.id("btnCrearCuenta"));
+		chromePepe.findElement(By.xpath("/html/body/div/oj-module/div[1]/div[2]/div/div/div/button")).click();
+		WebElement botonCrearCuenta = chromePepe.findElement(By.id("btnCrearCuenta"));
 
-		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		chromePepe.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-		assertThat(chrome.switchTo().alert().getText(), is("Registrado correctamente"));
-		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		chrome.switchTo().alert().accept();
-		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		WebElement loginNombre = chrome.findElement(
+		assertThat(chromePepe.switchTo().alert().getText(), is("Registrado correctamente"));
+		chromePepe.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		chromePepe.switchTo().alert().accept();
+		// chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		WebElement loginNombre = chromePepe.findElement(
 				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[1]/input"));
-		WebElement loginPwd = chrome.findElement(
+		WebElement loginPwd = chromePepe.findElement(
 				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[2]/input"));
-		WebElement btnEntrar = chrome.findElement(
+		WebElement btnEntrar = chromePepe.findElement(
 				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[3]/button"));
 
 		loginNombre.clear();
 		loginPwd.clear();
-		
+
 		loginNombre.sendKeys("PepeSelenium");
 		loginPwd.sendKeys("123");
-		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		// chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		btnEntrar.click();
-		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		chrome.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
+		chromePepe.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+		WebElement titulo = chromePepe
+				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
+		// Assert.assertEquals(ActualTitle, ExpectedTitle)
+		assertThat(titulo.getText(), is("Fantastico videochat"));
+
 	}
-	
+
 	@Test
 	@Order(2)
 	public void registrarLoginAna() {
 
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("use-fake-ui-for-media-stream");
+		options.addArguments("--use-fake-device-for-media-stream");
+
+		chromeAna = new ChromeDriver(options);
+
 		usersRepo.delete(usersRepo.findByName("AnaSelenium"));
-		chrome.get("https://localhost:7500/?ojr=register");
+		chromeAna.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		chromeAna.get("https://localhost:7500/?ojr=register");
 
-		chrome.findElement(By.id("details-button")).click();
-		chrome.findElement(By.id("proceed-link")).click();
-		chrome.manage().window().setSize(new Dimension(939, 1025));
+		chromeAna.findElement(By.id("details-button")).click();
+		chromeAna.findElement(By.id("proceed-link")).click();
+		chromeAna.manage().window().setSize(new Dimension(939, 1025));
 
-		WebElement cajaNombre = chrome
+		WebElement cajaNombre = chromeAna
 				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[1]"));
-		WebElement cajaEmail = chrome
+		WebElement cajaEmail = chromeAna
 				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[2]"));
-		WebElement cajaPwd1 = chrome
+		WebElement cajaPwd1 = chromeAna
 				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[3]"));
-		WebElement cajaPwd2 = chrome
+		WebElement cajaPwd2 = chromeAna
 				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[4]"));
 
 		cajaNombre.sendKeys("AnaSelenium");
 		cajaEmail.sendKeys("AnaSelenium@gmail.com");
 		cajaPwd1.sendKeys("123");
 		cajaPwd2.sendKeys("123");
-		chrome.findElement(By.xpath("/html/body/div/oj-module/div[1]/div[2]/div/div/div/button")).click();
-		WebElement botonCrearCuenta = chrome.findElement(By.id("btnCrearCuenta"));
+		chromeAna.findElement(By.xpath("/html/body/div/oj-module/div[1]/div[2]/div/div/div/button")).click();
+		WebElement botonCrearCuenta = chromeAna.findElement(By.id("btnCrearCuenta"));
 
-		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		chromeAna.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-		assertThat(chrome.switchTo().alert().getText(), is("Registrado correctamente"));
-		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		chrome.switchTo().alert().accept();
-		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		WebElement loginNombre = chrome.findElement(
+		assertThat(chromeAna.switchTo().alert().getText(), is("Registrado correctamente"));
+		chromeAna.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		chromeAna.switchTo().alert().accept();
+		// chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		WebElement loginNombre = chromeAna.findElement(
 				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[1]/input"));
-		WebElement loginPwd = chrome.findElement(
+		WebElement loginPwd = chromeAna.findElement(
 				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[2]/input"));
-		WebElement btnEntrar = chrome.findElement(
+		WebElement btnEntrar = chromeAna.findElement(
 				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[3]/button"));
 
 		loginNombre.clear();
 		loginPwd.clear();
-		
+
 		loginNombre.sendKeys("AnaSelenium");
 		loginPwd.sendKeys("123");
-		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		// chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		btnEntrar.click();
-		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		chrome.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
+		chromeAna.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+		WebElement titulo = chromeAna
+				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
+		// Assert.assertEquals(ActualTitle, ExpectedTitle)
+		assertThat(titulo.getText(), is("Fantastico videochat"));
 
 	}
 
-	
 	@Test
 	@Order(3)
 	public void registrarLoginLucas() {
-
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("use-fake-ui-for-media-stream");
+		options.addArguments("--use-fake-device-for-media-stream");
+		chromeLucas = new ChromeDriver(options);
 		usersRepo.delete(usersRepo.findByName("LucasSelenium"));
-		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		chrome.get("https://localhost:7500/?ojr=register");
+		chromeLucas.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		chromeLucas.get("https://localhost:7500/?ojr=register");
 
-		chrome.findElement(By.id("details-button")).click();
-		chrome.findElement(By.id("proceed-link")).click();
-		chrome.manage().window().setSize(new Dimension(939, 1025));
+		chromeLucas.findElement(By.id("details-button")).click();
+		chromeLucas.findElement(By.id("proceed-link")).click();
+		chromeLucas.manage().window().setSize(new Dimension(939, 1025));
 
-		WebElement cajaNombre = chrome
+		WebElement cajaNombre = chromeLucas
 				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[1]"));
-		WebElement cajaEmail = chrome
+		WebElement cajaEmail = chromeLucas
 				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[2]"));
-		WebElement cajaPwd1 = chrome
+		WebElement cajaPwd1 = chromeLucas
 				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[3]"));
-		WebElement cajaPwd2 = chrome
+		WebElement cajaPwd2 = chromeLucas
 				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[4]"));
 
 		cajaNombre.sendKeys("LucasSelenium");
 		cajaEmail.sendKeys("LucasSelenium@gmail.com");
 		cajaPwd1.sendKeys("123");
 		cajaPwd2.sendKeys("123");
-		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		chrome.findElement(By.xpath("/html/body/div/oj-module/div[1]/div[2]/div/div/div/button")).click();
-		WebElement botonCrearCuenta = chrome.findElement(By.id("btnCrearCuenta"));
+		// chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		chromeLucas.findElement(By.xpath("/html/body/div/oj-module/div[1]/div[2]/div/div/div/button")).click();
+		WebElement botonCrearCuenta = chromeLucas.findElement(By.id("btnCrearCuenta"));
 
-		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		chromeLucas.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-		assertThat(chrome.switchTo().alert().getText(), is("Registrado correctamente"));
-		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		chrome.switchTo().alert().accept();
-		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		WebElement loginNombre = chrome.findElement(
+		assertThat(chromeLucas.switchTo().alert().getText(), is("Registrado correctamente"));
+		chromeLucas.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		chromeLucas.switchTo().alert().accept();
+		// chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		WebElement loginNombre = chromeLucas.findElement(
 				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[1]/input"));
-		WebElement loginPwd = chrome.findElement(
+		WebElement loginPwd = chromeLucas.findElement(
 				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[2]/input"));
-		WebElement btnEntrar = chrome.findElement(
+		WebElement btnEntrar = chromeLucas.findElement(
 				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[3]/button"));
 
 		loginNombre.clear();
 		loginPwd.clear();
-		
+
 		loginNombre.sendKeys("LucasSelenium");
 		loginPwd.sendKeys("123");
-		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		//chrome.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[3]/button")).click();
+		// chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		// chrome.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[3]/button")).click();
 		btnEntrar.click();
-		chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		chrome.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
+		chromeLucas.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+		WebElement titulo = chromeLucas
+				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
+		// Assert.assertEquals(ActualTitle, ExpectedTitle)
+		assertThat(titulo.getText(), is("Fantastico videochat"));
 	}
 
-	
 }
