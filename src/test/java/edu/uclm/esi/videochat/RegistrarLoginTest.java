@@ -120,8 +120,7 @@ public class RegistrarLoginTest {
 		btnEntrar.click();
 		chromePepe.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-		WebElement titulo = chromePepe
-				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
+		WebElement titulo = chromePepe.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
 
 		chromePepe.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		assertThat(titulo.getText(), is("Fantastico videochat"));
@@ -262,7 +261,7 @@ public class RegistrarLoginTest {
 	}
 
 	@Test
-	public void D_rechazo() {
+	public void D_videollamadas() {
 
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("use-fake-ui-for-media-stream");
@@ -311,7 +310,30 @@ public class RegistrarLoginTest {
 		loginNombreAna.sendKeys("AnaSelenium");
 		loginPwdAna.sendKeys("123");
 		btnEntrarAna.click();
+		
+		
+		// lucas se loguea
 
+		chromeLucas = new ChromeDriver(options);
+		chromeLucas.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		chromeLucas.get("https://localhost:7500");
+		chromeLucas.findElement(By.id("details-button")).click();
+		chromeLucas.findElement(By.id("proceed-link")).click();
+		chromeLucas.manage().window().setSize(new Dimension(939, 1025));
+
+		WebElement loginNombreLucas = chromeLucas.findElement(
+				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[1]/input"));
+		WebElement loginPwdLucas = chromeLucas.findElement(
+				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[2]/input"));
+		WebElement btnEntrarLucas = chromeLucas.findElement(
+				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/div[1]/div[3]/button"));
+
+		loginNombreLucas.clear();
+		loginPwdLucas.clear();
+		loginNombreLucas.sendKeys("LucasSelenium");
+		loginPwdLucas.sendKeys("123");
+		btnEntrarLucas.click();		
+		
 		// pepe llama a ana
 
 		// indice de ultimo div determina posicion del usuario, ana es la segunda
@@ -332,6 +354,19 @@ public class RegistrarLoginTest {
 		
     	assertThat(chromePepe.switchTo().alert().getText(), is("AnaSelenium ha rechazado la llamada"));
 		chromePepe.switchTo().alert().accept();
+		
+		//ana llama al pato lucas
+		
+		WebElement llamarLucas = chromeAna.findElement(
+				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div[2]/div[1]/div[3]/button"));
+		llamarLucas.click();
+		
+		new WebDriverWait(chromeLucas, 60).ignoring(NoAlertPresentException.class)
+		.until(ExpectedConditions.alertIsPresent());
+		
+		assertThat(chromeLucas.switchTo().alert().getText(), is("Te llama AnaSelenium. ¿Contestar?\n"));
+		chromeLucas.switchTo().alert().accept();
+		
 		
 
 	}
