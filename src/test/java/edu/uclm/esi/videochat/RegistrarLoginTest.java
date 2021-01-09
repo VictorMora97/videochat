@@ -267,7 +267,7 @@ public class RegistrarLoginTest {
 		options.addArguments("use-fake-ui-for-media-stream");
 		options.addArguments("--use-fake-device-for-media-stream");
 
-		// pepe se loguea
+		// PEPE SE LOGUEA
 
 		chromePepe = new ChromeDriver(options);
 		chromePepe.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -289,7 +289,7 @@ public class RegistrarLoginTest {
 		loginPwdPepe.sendKeys("123");
 		btnEntrarPepe.click();
 
-		// ana se loguea
+		// ANA SE LOGUEA
 
 		chromeAna = new ChromeDriver(options);
 		chromeAna.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -311,8 +311,7 @@ public class RegistrarLoginTest {
 		loginPwdAna.sendKeys("123");
 		btnEntrarAna.click();
 		
-		
-		// lucas se loguea
+		// LUCAS SE LOGUEA
 
 		chromeLucas = new ChromeDriver(options);
 		chromeLucas.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -334,14 +333,14 @@ public class RegistrarLoginTest {
 		loginPwdLucas.sendKeys("123");
 		btnEntrarLucas.click();		
 		
-		// pepe llama a ana
+		// PEPE LLAMA A ANA
 
 		// indice de ultimo div determina posicion del usuario, ana es la segunda
 		WebElement llamarAna = chromePepe.findElement(
 				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div[2]/div[1]/div[2]/button"));
 		llamarAna.click();
 
-		// ana rechaza a pepe
+		// ANA RECHAZA A PEPE
 			
 		new WebDriverWait(chromeAna, 60).ignoring(NoAlertPresentException.class)
 		.until(ExpectedConditions.alertIsPresent());
@@ -355,11 +354,13 @@ public class RegistrarLoginTest {
     	assertThat(chromePepe.switchTo().alert().getText(), is("AnaSelenium ha rechazado la llamada"));
 		chromePepe.switchTo().alert().accept();
 		
-		//ana llama al pato lucas
+		// ANA LLAMA A LUCAS
 		
 		WebElement llamarLucas = chromeAna.findElement(
 				By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div[2]/div[1]/div[3]/button"));
 		llamarLucas.click();
+		
+		// LUCAS ACEPTA
 		
 		new WebDriverWait(chromeLucas, 60).ignoring(NoAlertPresentException.class)
 		.until(ExpectedConditions.alertIsPresent());
@@ -367,7 +368,23 @@ public class RegistrarLoginTest {
 		assertThat(chromeLucas.switchTo().alert().getText(), is("Te llama AnaSelenium. ¿Contestar?\n"));
 		chromeLucas.switchTo().alert().accept();
 		
+		// COMPROBAR VIDEOLLAMADA
 		
+		chromeLucas.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		chromeAna.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		WebElement videoAna = chromeAna.findElement(By.xpath("//*[@id=\"widgetVideoLocal\"]"));
+		WebElement videoLucas = chromeAna.findElement(By.xpath("//*[@id=\"widgetVideoRemoto\"]"));
+		chromeLucas.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		chromeAna.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
+		if(videoAna.isEnabled() && videoLucas.isEnabled()) {
+			//chromeAna.quit();
+			//chromeLucas.quit();
+			chromePepe.quit();
+		}
+
+		assertThat(videoAna.isEnabled(), is(true));
+		assertThat(videoLucas.isEnabled(), is(true));
 
 	}
 
