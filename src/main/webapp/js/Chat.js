@@ -102,6 +102,29 @@ class Chat {
 		};
 		this.chat.send(JSON.stringify(mensaje));
 		//this.registerMsg(mensaje);
+		
+		
+		
+		
+		var info = {
+				mensajeQueVoyAEnviar : this.mensajeQueVoyAEnviar()
+				//,sender : self.name()
+		};
+		var data = {
+				data : JSON.stringify(info),
+				url : "messages/msgBroadcast",
+				type : "put",
+				contentType : 'application/json',
+				success : function(response) {
+					alert("Mensaje Broadcast guardado en BBDD");
+				},
+				error : function(response) {
+					alert("Error guardando msg en Chat.js " + response.responseJSON.error);
+				}
+		};
+		$.ajax(data);    
+		
+		
 	}
 
 	

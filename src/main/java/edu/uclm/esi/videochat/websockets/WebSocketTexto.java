@@ -55,7 +55,7 @@ public class WebSocketTexto extends WebSocketVideoChat {
 			Message mensaje = new Message();
 			mensaje.setMessage(jso.getString("message"));
 			mensaje.setSender(enviador);
-			guardarMensaje(mensaje);
+			//guardarMensaje(mensaje);
 		} else if (type.equals("PARTICULAR")) {
 			String destinatario = jso.getString("destinatario");
 			User user = Manager.get().findUser(destinatario);
@@ -69,14 +69,14 @@ public class WebSocketTexto extends WebSocketVideoChat {
 			Message mensaje = new Message();
 			mensaje.setMessage(jso.getString("texto"));
 			mensaje.setSender(enviador);
-			guardarMensaje(mensaje);
+			//guardarMensaje(mensaje);
 		}
 	}
 
-	private void guardarMensaje(Message mensaje) {
-		Manager.get().getMessageRepo().save(mensaje);
-		//Message.gegetMessageRepo()
-	}
+//	private void guardarMensaje(Message mensaje) {
+//		Manager.get().getMessageRepo().save(mensaje);
+//		//Message.gegetMessageRepo()
+//	}
 
 	@Override
 	protected void handleBinaryMessage(WebSocketSession session, BinaryMessage message) {

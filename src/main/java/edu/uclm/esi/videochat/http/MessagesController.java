@@ -39,21 +39,19 @@ public class MessagesController {
 	
 	
 	@PutMapping("/msgBroadcast")
-	public void register(@RequestBody Map<String, Object> credenciales) throws Exception {
-		JSONObject jso = new JSONObject(credenciales);
-		String id = jso.getString("id");
-		Long date = jso.getLong("date");
-		String messageContenido = jso.getString("message");
-		String recipient = jso.getString("recipient");
-		String sender = jso.getString("sender");
-		
-		
+	public void msgBroadcast(@RequestBody Map<String, Object> mensaje) throws Exception {
+		JSONObject jso = new JSONObject(mensaje);
+
+		String contenido = jso.getString("mensajeQueVoyAEnviar");
+		//String enviador = jso.getString("sender");
+
 		Message message = new Message();
-		message.setId(id);
-		message.setDate(date);
-		message.setMessage(messageContenido);
-		message.setRecipient(recipient);
-		message.setSender(sender);
+		
+		message.setDate(01);
+		message.setMessage(contenido);
+		message.setRecipient("Broadcast");
+		message.setSender("YO");
+
 		
 //		String picture = jso.optString("picture");
 //		user.setPicture(picture);

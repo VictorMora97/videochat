@@ -61,6 +61,7 @@ public class UsersController {
 		String pwd2 = jso.getString("pwd2");
 		if (!pwd1.equals(pwd2))
 			throw new Exception("Error: las contraseñas no coinciden");
+		
 		User user = new User();
 		user.setEmail(email);
 		user.setName(name);

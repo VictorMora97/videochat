@@ -123,7 +123,16 @@ public class RegistrarLoginTest {
 		WebElement titulo = chromePepe.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
 
 		chromePepe.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		
+//		if(titulo.getText()=="Login") {
+//			chromePepe.navigate().refresh();
+//		}
+		
+		chromePepe.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		
 		assertThat(titulo.getText(), is("Fantastico videochat"));
+
+		
 		chromePepe.quit();
 	}
 
@@ -380,7 +389,7 @@ public class RegistrarLoginTest {
 		if(videoAna.isEnabled() && videoLucas.isEnabled()) {
 			//chromeAna.quit();
 			//chromeLucas.quit();
-			chromePepe.quit();
+			//chromePepe.quit();
 		}
 
 		assertThat(videoAna.isEnabled(), is(true));

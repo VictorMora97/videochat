@@ -16,6 +16,11 @@ define(['knockout', 'appController', 'ojs/ojmodule-element-utils', 'accUtils'],
 		self.estadoSignaling = self.videoChat().estado;
 		self.errorChatDeTexto = self.chat().error;
 		self.errorSignaling = self.videoChat().error;
+		
+		//HECHO POR MI PARA GUARDAR MENSAJES
+		
+		self.mensajeQueVoyAEnviar = ko.observable("");
+		//self.name = ko.observable("");
 
 		// Header Config
 		self.headerConfig = ko.observable({'view':[], 'viewModel':null});
@@ -30,6 +35,29 @@ define(['knockout', 'appController', 'ojs/ojmodule-element-utils', 'accUtils'],
 			getUsuariosConectados();			
 		};
 
+
+//		self.enviarATodos = function(){  
+//			//alert("Mensaje Broadcast guardado en BBDD");
+//			var info = {
+//					mensajeQueVoyAEnviar : self.mensajeQueVoyAEnviar()
+//					//,sender : self.name()
+//			};
+//			var data = {
+//					data : JSON.stringify(info),
+//					url : "messages/msgBroadcast",
+//					type : "put",
+//					contentType : 'application/json',
+//					success : function(response) {
+//						alert("Mensaje Broadcast guardado en BBDD");
+//					},
+//					error : function(response) {
+//						alert("Error: " + response.responseJSON.error);
+//					}
+//			};
+//			$.ajax(data);    	  
+//		}
+
+		
 		function getUsuariosConectados() {
 			var data = {	
 				url : "users/getUsuariosConectados",
@@ -48,6 +76,11 @@ define(['knockout', 'appController', 'ojs/ojmodule-element-utils', 'accUtils'],
 			};
 			$.ajax(data);
 		}
+		
+		
+		
+		
+		
 		
 		self.encenderVideoLocal = function() {
 			self.videoChat().encenderVideoLocal();
@@ -73,8 +106,7 @@ define(['knockout', 'appController', 'ojs/ojmodule-element-utils', 'accUtils'],
 			self.chat().registerMsg();
 		};
 		
-		
-		
+			
 		
 		
 		
@@ -102,11 +134,7 @@ define(['knockout', 'appController', 'ojs/ojmodule-element-utils', 'accUtils'],
 //			$.ajax(data);    	  
 //		}
 		
-		
-		
-		
-		
-		
+			
 		
 		
 	}
