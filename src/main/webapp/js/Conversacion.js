@@ -1,6 +1,11 @@
 class Conversacion {
-	constructor(ko, nombreInterlocutor, chat) {
+	constructor(ko,nombreInterlocutor,nombreSender, chat) {
 		this.nombreInterlocutor = nombreInterlocutor;
+		this.nombreSender = nombreSender;
+		// this.user = app.user;
+		// this.user = user;
+		
+		
 		this.mensajes = ko.observableArray([]);
 		this.textoAEnviar = ko.observable("");
 		this.chat = chat;
@@ -21,11 +26,11 @@ class Conversacion {
 		var mensaje = new Mensaje(this.textoAEnviar());
 		this.addMensaje(mensaje);
 		
-		
+		var yo = document.getElementById("yo").innerHTML;
 		
 		var info = {
 				textoAEnviar : this.textoAEnviar(),
-				sender : "yoPrivado",
+				sender : yo,
 				recipient : this.nombreInterlocutor
 		};
 		var data = {
@@ -34,7 +39,7 @@ class Conversacion {
 				type : "put",
 				contentType : 'application/json',
 				success : function(response) {
-					//alert("Mensaje Broadcast guardado en BBDD");
+					// alert("Mensaje Broadcast guardado en BBDD");
 				},
 				error : function(response) {
 					alert("Error guardando msg en BD " + response.responseJSON.error);

@@ -43,6 +43,7 @@ public class MessagesController {
 		JSONObject jso = new JSONObject(mensaje);
 
 		String contenido = jso.getString("mensajeQueVoyAEnviar");
+		String sender = jso.getString("sender");
 		//String enviador = jso.getString("sender");
 
 		Message message = new Message();
@@ -50,7 +51,29 @@ public class MessagesController {
 		message.setDate(01);
 		message.setMessage(contenido);
 		message.setRecipient("Broadcast");
-		message.setSender("YO");
+		message.setSender(sender);
+
+		
+//		String picture = jso.optString("picture");
+//		user.setPicture(picture);
+		msgRepo.save(message);		
+	}
+	
+	@PutMapping("/msgPrivado")
+	public void msgPrivado(@RequestBody Map<String, Object> mensaje) throws Exception {
+		JSONObject jso = new JSONObject(mensaje);
+
+		String contenido = jso.getString("textoAEnviar");
+		String sender = jso.getString("sender");
+		String recipient = jso.getString("recipient");
+		//String enviador = jso.getString("sender");
+
+		Message message = new Message();
+		
+		message.setDate(01);
+		message.setMessage(contenido);
+		message.setRecipient(recipient);
+		message.setSender(sender);
 
 		
 //		String picture = jso.optString("picture");

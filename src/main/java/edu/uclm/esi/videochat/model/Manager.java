@@ -18,12 +18,12 @@ public class Manager {
 	private ConcurrentHashMap<String, User> usersMap;
 	private ConcurrentHashMap<String, HttpSession> sessions;
 	
-	@Autowired
-	private MessageRepository messageRepo;
-	
-	public MessageRepository getMessageRepo() {
-		return messageRepo;
-	}
+//	@Autowired
+//	private MessageRepository messageRepo;
+//	
+//	public MessageRepository getMessageRepo() {
+//		return messageRepo;
+//	}
 
 	private Manager() {
 		this.usersMap = new ConcurrentHashMap<>();
