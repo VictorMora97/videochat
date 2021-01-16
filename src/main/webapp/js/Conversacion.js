@@ -1,7 +1,7 @@
 class Conversacion {
-	constructor(ko,nombreInterlocutor,nombreSender, chat) {
+	constructor(ko,nombreInterlocutor, chat) {
 		this.nombreInterlocutor = nombreInterlocutor;
-		this.nombreSender = nombreSender;
+		//this.nombreSender = nombreSender;
 		// this.user = app.user;
 		// this.user = user;
 		

@@ -104,11 +104,11 @@ class Chat {
 		// this.registerMsg(mensaje);
 		
 		
-		var yo = document.getElementById("yo").innerHTML;
+		
 		
 		var info = {
 				mensajeQueVoyAEnviar : this.mensajeQueVoyAEnviar(),
-				sender : yo
+				sender : document.getElementById("yo").innerHTML
 		};
 		var data = {
 				data : JSON.stringify(info),
@@ -116,7 +116,7 @@ class Chat {
 				type : "put",
 				contentType : 'application/json',
 				success : function(response) {
-					alert("Mensaje Broadcast guardado en BBDD");
+					//alert("Mensaje Broadcast guardado en BBDD");
 				},
 				error : function(response) {
 					alert("Error guardando msg en Chat.js " + response.responseJSON.error);
@@ -127,32 +127,7 @@ class Chat {
 		
 	}
 
-	
-// registerMsg(mensaje) {
-// var info = {
-// id : "prueba",
-// date : "prueba",//self.date,
-// message : "prueba", //self.message,
-// recipient : "prueba", //self.recipient,
-// sender : "prueba" //self.sender
-// //picture : self.picture()
-// };
-// var data = {
-// data : JSON.stringify(mensaje),
-// url : "messages/msgBroadcast",
-// type : "put",
-// contentType : 'application/json',
-// success : function(response) {
-// alert("Mensaje guardado correctamente");
-//					
-// },
-// error : function(response) {
-// alert("ERROR GUARDANDO MSG " + response.responseJSON.error);
-// }
-// };
-// $.ajax(data);
-// }
-//	
+
 
 	
 	buscarConversacion(nombreInterlocutor) {
@@ -163,11 +138,11 @@ class Chat {
 		return null;
 	}
 	
-	setDestinatario(interlocutor, enviador) {
+	setDestinatario(interlocutor) {
 		this.destinatario(interlocutor);
 		var conversacion = this.buscarConversacion(interlocutor.nombre);
 		if (conversacion==null) {
-			conversacion = new Conversacion(this.ko, interlocutor.nombre, enviador.nombre, this) ;
+			conversacion = new Conversacion(this.ko, interlocutor.nombre, this) ;
 			this.conversaciones.push(conversacion);
 		}
 		this.ponerVisible(interlocutor.nombre);
