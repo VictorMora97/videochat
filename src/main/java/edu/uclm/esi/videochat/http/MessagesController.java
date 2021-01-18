@@ -1,8 +1,10 @@
 package edu.uclm.esi.videochat.http;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.uclm.esi.videochat.model.Email;
@@ -80,5 +83,55 @@ public class MessagesController {
 //		user.setPicture(picture);
 		msgRepo.save(message);		
 	}
+	
+	
+	
+	@PostMapping(value = "/getHistorial")
+	public List<Message> getHistorial(HttpServletRequest request, @RequestBody Map<String, Object> credenciales) throws Exception {
+		JSONObject jso = new JSONObject(credenciales);
+		String sender = jso.getString("sender");
+		String recipient = jso.getString("recipient");
+
+		List<Message> msg = msgRepo.findByRecipientAndSender(recipient, sender);
+		
+//    	Message msg = new Message();
+//    	msg.setSender(sender);
+//    	msg.setRecipient(recipient);
+   	
+
+		return msg;
+	}
+	
+	
+//	@GetMapping(value = "/getHistorial")
+//	public Message getHistorial(HttpServletRequest request, @RequestBody Map<String, Object> mensaje) throws Exception {
+//		JSONObject jso = new JSONObject(mensaje);
+//		String sender = jso.getString("sender");
+//		String recipient = jso.getString("recipient");
+//		
+//		Message message = msgRepo.findBySenderAndRecipient(sender, recipient);
+//		if (message==null)
+//			throw new Exception("Incorrect get message");
+//
+//		return message;
+//	}
+	
+	
+//    @GetMapping("/getHistorial")
+//    public String getHistorial(@RequestParam String sender, @RequestParam String recipient) {
+// 
+//    	//Message msg = msgRepo.findBySenderAndRecipient(sender, recipient);
+//    	Message msg = new Message();
+//    	msg.setSender(sender);
+//    	msg.setRecipient(recipient);
+//    	
+////    	List<String> historial = new Vector<String>();
+////    	historial.add(sender);
+////    	historial.add(sender);
+//    	
+//        return sender;
+// 
+//    }
+	
 	
 }

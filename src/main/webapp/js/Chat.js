@@ -100,11 +100,7 @@ class Chat {
 			type : "BROADCAST",
 			message : this.mensajeQueVoyAEnviar()
 		};
-		this.chat.send(JSON.stringify(mensaje));
-		// this.registerMsg(mensaje);
-		
-		
-		
+		this.chat.send(JSON.stringify(mensaje));	
 		
 		var info = {
 				mensajeQueVoyAEnviar : this.mensajeQueVoyAEnviar(),
@@ -127,9 +123,6 @@ class Chat {
 		
 	}
 
-
-
-	
 	buscarConversacion(nombreInterlocutor) {
 		for (var i=0; i<this.conversaciones().length; i++) {
 			if (this.conversaciones()[i].nombreInterlocutor==nombreInterlocutor)
@@ -147,6 +140,35 @@ class Chat {
 		}
 		this.ponerVisible(interlocutor.nombre);
 	}
+	
+	
+
+	recuperarChat(interlocutor){
+		
+		
+		var info = {
+				sender : "perro",//document.getElementById("yo").innerHTML,
+				recipient : interlocutor.nombre
+		};
+		var data = {
+				data : JSON.stringify(info),
+				url : "messages/getHistorial",
+				type : "post",
+				contentType : 'application/json',
+				success : function(response) {
+					alert("Mensajes recuperados!!!!!! "+response[2].message);
+				},
+				error : function(response) {
+					alert("Error recuperando msg " + response);
+				}
+		};
+		$.ajax(data); 
+		
+		
+	}
+	
+	
+	
 	
 	ponerVisible(nombreInterlocutor) {
 		for (var i=0; i<this.conversaciones().length; i++) {

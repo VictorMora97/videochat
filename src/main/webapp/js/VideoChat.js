@@ -276,7 +276,6 @@ class VideoChat {
 	}	
 	
 	
-	
 	enviarOferta(destinatario) {
 
 		zonaVideo.style.display = 'block';
