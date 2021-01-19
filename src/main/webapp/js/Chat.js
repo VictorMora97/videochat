@@ -175,7 +175,7 @@ class Chat {
 						var message = response[i].message;	
 						var date = response[i].date;											
 						var fecha = new Date(date);
-						var MensajeRecuperado = " ["+fecha.toLocaleString() +"] --> "+sender+": "+message+"<br>";					
+						var MensajeRecuperado = "<strong>["+fecha.toLocaleString() +"] </strong> "+sender+": "+message+"<br>";					
 						prueba.innerHTML+= MensajeRecuperado;
 					}
 

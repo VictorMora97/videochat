@@ -1,13 +1,13 @@
-<div class="oj-hybrid-applayout-page">
+<div class="oj-hybrid-applayout-page fondo">
 	<div class="oj-applayout-fixed-top">
 		<header role="banner" class="oj-hybrid-applayout-header">
 			<oj-module config="[[headerConfig]]"></oj-module>
 		</header>
 	</div>
-	<div class="oj-applayout-content">
+	<div class="oj-applayout-content fondo">
 		<div role="main" class="oj-hybrid-applayout-content">
 			<div class="oj-hybrid-padding">
-				<h1>Fantastico videochat</h1>
+				<h1 class="relieveTitulo">Fantastico videochat</h1>
 				<!-- <span data-bind="html : estadoChatDeTexto"></span> - <span data-bind="html : estadoSignaling"></span> -->
 
 				<br>
@@ -17,11 +17,11 @@
 				<div class="oj-sm-12">
 					<div class="oj-sm-4">
 						<!-- ko if : picture -->
-						<img data-bind="attr : { src : picture }" width="50" height="50">
+						<img data-bind="attr : { src : picture }" width="120" height="120">
 						<!-- /ko -->
 					</div>
 					<div class="oj-sm-4">
-						Conectado como <span id="yo" data-bind="html : name"></span>
+						 Conectado como...  <span id="yo" class="conectadoComo" data-bind="html : name"></span> 
 					</div>
 					<div class="oj-sm-4"></div>
 				</div>
@@ -37,7 +37,7 @@
 					<div class="oj-sm-6">
 
 
-						<h4>Usuarios</h4>
+						<h4  class="relieveTexto">Usuarios</h4>
 						<!-- ko foreach : usuarios -->
 						<div>
 							<!-- ko if : foto -->
@@ -66,7 +66,7 @@
 
 
 					<div class="oj-sm-6">
-						<h4>Mensajes a todos</h4>
+						<h4  class="relieveTexto">Mensajes a todos</h4>
 						<!-- ko foreach : mensajesRecibidos -->
 						<div>
 							<strong data-bind="html : hora"></strong> &nbsp; <span
@@ -84,7 +84,7 @@
 
 				<div class="oj-sm-12 oj-flex">
 					<div class="oj-sm-4">
-						<h4>Conversaciones privadas</h4>
+						<h4  class="relieveTexto">Conversaciones privadas</h4>
 						<!-- ko foreach : conversaciones -->
 						<div data-bind="visible : visible">
 							<!-- ko with : nombreInterlocutor -->
@@ -117,7 +117,7 @@
 
 
 					<div class="oj-sm-4" style="display: none;" id="zonaVideo">
-						<h4>Zona de video</h4>
+						<h4  class="relieveTexto">Zona de video</h4>
 						<video id="widgetVideoLocal" playsinline autoplay controls mute
 							width="200" height="200"></video>
 						<video id="widgetVideoRemoto" playsinline autoplay controls
@@ -131,7 +131,7 @@
 
 
 					<div class="oj-sm-4" id="zonaHistorial">
-						<h4>Conversacion recuperada</h4>
+						<h4  class="relieveTexto">Conversacion recuperada</h4>
 						<!-- ko with : conversacionRecuperada -->
 
 

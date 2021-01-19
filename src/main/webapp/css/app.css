@@ -21,3 +21,31 @@
   height: 1px;
   overflow: hidden;
 }
+
+.fondo {
+	background-color: #f1ffb5;
+	background-image: url("fondo.jpg");
+	
+}
+
+.oj-hybrid-applayout-header{
+	background-color: #c2f5c6;
+}
+
+.relieveTitulo {
+	text-shadow: 2px 2px 5px #3eff1c;
+	font-size: 50px;
+}
+.relieveTexto {
+	/* text-shadow: 2px 2px 5px yellow; */
+}
+
+.bordes {
+	border-style: outset;
+	}
+	
+.conectadoComo {
+	font-weight: bold;
+	font-size: 20px;
+	font-style: italic;
+}
