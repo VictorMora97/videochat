@@ -1,4 +1,4 @@
-+define(['knockout', 'appController', 'ojs/ojmodule-element-utils', 'accUtils'],
+define(['knockout', 'appController', 'ojs/ojmodule-element-utils', 'accUtils'],
 		function(ko, app, moduleUtils, accUtils) {
 
 	function ProfileViewModel() {
@@ -18,10 +18,6 @@
 			}
 			reader.readAsBinaryString(file);
 		}
-		
-		
-		
-		T
 		self.register = function() {
 			var info = {
 				name : self.name(),
@@ -46,8 +42,6 @@
 			$.ajax(data);    	  
 		}
 
-		
-		
 		// Header Config
 		self.headerConfig = ko.observable({'view':[], 'viewModel':null});
 		moduleUtils.createView({'viewPath':'views/header.html'}).then(function(view) {

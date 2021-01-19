@@ -1,7 +1,9 @@
 package edu.uclm.esi.videochat.http;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -50,8 +52,11 @@ public class MessagesController {
 		//String enviador = jso.getString("sender");
 
 		Message message = new Message();
-		
-		message.setDate(01);
+//		Date date = new Date();
+//		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+//		String strDate= formatter.format(date);
+		long date = System.currentTimeMillis();
+		message.setDate(date);
 		message.setMessage(contenido);
 		message.setRecipient("Broadcast");
 		message.setSender(sender);
@@ -72,8 +77,11 @@ public class MessagesController {
 		//String enviador = jso.getString("sender");
 
 		Message message = new Message();
-		
-		message.setDate(01);
+//		Date date = new Date();
+//		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+//		String strDate= formatter.format(date);
+		long date = System.currentTimeMillis();
+		message.setDate(date);
 		message.setMessage(contenido);
 		message.setRecipient(recipient);
 		message.setSender(sender);
@@ -92,7 +100,7 @@ public class MessagesController {
 		String sender = jso.getString("sender");
 		String recipient = jso.getString("recipient");
 
-		List<Message> msg = msgRepo.findByRecipientAndSender(recipient, sender);
+		List<Message> msg = msgRepo.findByRecipientAndSenderOrderByDate(recipient, sender);
 		
 //    	Message msg = new Message();
 //    	msg.setSender(sender);

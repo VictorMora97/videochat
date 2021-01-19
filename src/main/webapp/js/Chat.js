@@ -153,6 +153,7 @@ class Chat {
 		
 		
 		var prueba = document.getElementById("prueba");
+		prueba.innerHTML="";
 		var info = {
 				sender : "perro",// document.getElementById("yo").innerHTML,
 				recipient : interlocutor.nombre
@@ -171,7 +172,15 @@ class Chat {
 						var sender = response[i].sender;
 						var recipient = response[i].recipient;
 						var message = response[i].message;	
-						prueba.innerHTML+= sender+ " --> "+message+"<br>";
+						var date = response[i].date;
+						
+						
+						 var fecha = new Date(date);
+						//var formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+						//var strDate= formatter.format(fecha.toString);
+						
+						
+						prueba.innerHTML+= " ["+fecha.toLocaleString() +"] --> "+sender+": "+message+"<br>";
 // var mensajeRecuperado = {
 // sender : sender,
 // recipient : recipient,
