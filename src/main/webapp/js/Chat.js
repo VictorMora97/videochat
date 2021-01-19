@@ -10,6 +10,7 @@ class Chat {
 		this.usuarios = ko.observableArray([]);
 		this.mensajesRecibidos = ko.observableArray([]);
 		this.conversaciones = ko.observableArray([]);
+		this.conversacionRecuperada = ko.observableArray([]);
 		
 		this.destinatario = ko.observable();
 		this.mensajeQueVoyAEnviar = ko.observable();
@@ -61,6 +62,7 @@ class Chat {
 				var userName = data.userName;
 				for (var i=0; i<self.usuarios().length; i++) {
 					if (self.usuarios()[i].nombre == userName) {
+						
 						self.usuarios.splice(i, 1);
 						break;
 					}
@@ -112,7 +114,7 @@ class Chat {
 				type : "put",
 				contentType : 'application/json',
 				success : function(response) {
-					//alert("Mensaje Broadcast guardado en BBDD");
+					// alert("Mensaje Broadcast guardado en BBDD");
 				},
 				error : function(response) {
 					alert("Error guardando msg en Chat.js " + response.responseJSON.error);
@@ -142,12 +144,17 @@ class Chat {
 	}
 	
 	
+	
+	
+	
+	
 
 	recuperarChat(interlocutor){
 		
 		
+		var prueba = document.getElementById("prueba");
 		var info = {
-				sender : "perro",//document.getElementById("yo").innerHTML,
+				sender : "perro",// document.getElementById("yo").innerHTML,
 				recipient : interlocutor.nombre
 		};
 		var data = {
@@ -156,7 +163,26 @@ class Chat {
 				type : "post",
 				contentType : 'application/json',
 				success : function(response) {
-					alert("Mensajes recuperados!!!!!! "+response[2].message);
+					// alert("Mensajes recuperados!!!!!! "+response[2].sender+ "
+					// "+response[2].recipient+" "+response[2].message);
+
+					var listaMensajes = [];
+					for (var i = 0; i < response.length; i++) {
+						var sender = response[i].sender;
+						var recipient = response[i].recipient;
+						var message = response[i].message;	
+						prueba.innerHTML+= sender+ " --> "+message+"<br>";
+// var mensajeRecuperado = {
+// sender : sender,
+// recipient : recipient,
+// message : message
+// };
+// listaMensajes.push(mensajeRecuperado);
+						
+					}
+					// alert("Mensajes recuperados!!!!!!
+					// "+listaMensajes[0].message);
+
 				},
 				error : function(response) {
 					alert("Error recuperando msg " + response);
@@ -164,6 +190,16 @@ class Chat {
 		};
 		$.ajax(data); 
 		
+	}
+	
+	
+	crearHistorial(sender, recipient, message){
+// msg = new Message();
+// msg.setSender(sender);
+// msg.setRecipient(recipient);
+// msg.setMessage(message);
+//		
+// this.conversacionRecuperada.push(msg);
 		
 	}
 	
