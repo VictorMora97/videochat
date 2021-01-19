@@ -16,6 +16,7 @@ class Chat {
 		this.mensajeQueVoyAEnviar = ko.observable();
 		
 		var zonaVideo = document.getElementById("zonaVideo");
+		var zonaHistorial = document.getElementById("zonaHistorial");
 		
 		this.chat = new WebSocket("wss://" + window.location.host + "/wsTexto");
 		
@@ -142,17 +143,17 @@ class Chat {
 		}
 		this.ponerVisible(interlocutor.nombre);
 	}
-	
-	
-	
-	
-	
-	
+
 
 	recuperarChat(interlocutor){
+//		if(zonaHistorial.style.display == 'none'){
+			zonaHistorial.style.display = 'block';
+//		} else {
+//			zonaHistorial.style.display = 'none';
+//		}
 		
 		var listaMensajes = [];
-		var prueba = document.getElementById("prueba");
+		var prueba = document.getElementById("recuperado");
 		prueba.innerHTML="";
 		var info = {
 				sender : document.getElementById("yo").innerHTML,
@@ -187,8 +188,8 @@ class Chat {
 		$.ajax(data); 
 		
 	}
-	
-	
+
+
 	crearHistorial(sender, recipient, message){
 // msg = new Message();
 // msg.setSender(sender);

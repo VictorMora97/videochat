@@ -15,9 +15,7 @@ import edu.uclm.esi.videochat.model.User;
 public class WebSocketTexto extends WebSocketVideoChat {
 	
 	@Override
-	
-	
-	//añadido por mi		
+			
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		session.setBinaryMessageSizeLimit(1000*1024*1024);
 		session.setTextMessageSizeLimit(64*1024);
@@ -36,7 +34,7 @@ public class WebSocketTexto extends WebSocketVideoChat {
 		this.sessionsByUserName.put(user.getName(), wrapper);
 		this.sessionsById.put(session.getId(), wrapper);
 		
-		System.out.println(user.getName()+ "ID Sesion de texto: "+session.getId());
+		//System.out.println(user.getName()+ "ID Sesion de texto: "+session.getId());
 	}
 	
 

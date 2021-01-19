@@ -13,7 +13,6 @@ import edu.uclm.esi.videochat.model.User;
 public class WebSocketSignaling extends WebSocketVideoChat {
 	private ConcurrentHashMap<String, VideoRoom> videoRooms = new ConcurrentHashMap<>();
 
-	// añadido por mi
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 
 		session.setTextMessageSizeLimit(64 * 1024);
@@ -25,7 +24,7 @@ public class WebSocketSignaling extends WebSocketVideoChat {
 		this.sessionsByUserName.put(user.getName(), wrapper);
 		this.sessionsById.put(session.getId(), wrapper);
 
-		System.out.println(user.getName() + "ID Sesion de video: " + session.getId());
+		//System.out.println(user.getName() + "ID Sesion de video: " + session.getId());
 	}
 
 	@Override
