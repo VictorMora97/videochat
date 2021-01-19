@@ -155,9 +155,8 @@ class Chat {
 		var prueba = document.getElementById("prueba");
 		prueba.innerHTML="";
 		var info = {
-				sender : "perro",// interlocutor.nombre ,//
-									// document.getElementById("yo").innerHTML,
-				recipient : "gato"
+				sender : document.getElementById("yo").innerHTML,
+				recipient : interlocutor.nombre
 		};
 		var data = {
 				data : JSON.stringify(info),
