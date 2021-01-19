@@ -151,12 +151,13 @@ class Chat {
 
 	recuperarChat(interlocutor){
 		
-		
+		var listaMensajes = [];
 		var prueba = document.getElementById("prueba");
 		prueba.innerHTML="";
 		var info = {
-				sender : "perro",// document.getElementById("yo").innerHTML,
-				recipient : interlocutor.nombre
+				sender : "perro",// interlocutor.nombre ,//
+									// document.getElementById("yo").innerHTML,
+				recipient : "gato"
 		};
 		var data = {
 				data : JSON.stringify(info),
@@ -164,33 +165,20 @@ class Chat {
 				type : "post",
 				contentType : 'application/json',
 				success : function(response) {
-					// alert("Mensajes recuperados!!!!!! "+response[2].sender+ "
-					// "+response[2].recipient+" "+response[2].message);
-
-					var listaMensajes = [];
+	
+					response.sort(function(a,b) {
+					    return parseFloat(a.date) - parseFloat(b.date);
+					});
+					
 					for (var i = 0; i < response.length; i++) {
 						var sender = response[i].sender;
 						var recipient = response[i].recipient;
 						var message = response[i].message;	
-						var date = response[i].date;
-						
-						
-						 var fecha = new Date(date);
-						//var formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-						//var strDate= formatter.format(fecha.toString);
-						
-						
-						prueba.innerHTML+= " ["+fecha.toLocaleString() +"] --> "+sender+": "+message+"<br>";
-// var mensajeRecuperado = {
-// sender : sender,
-// recipient : recipient,
-// message : message
-// };
-// listaMensajes.push(mensajeRecuperado);
-						
+						var date = response[i].date;											
+						var fecha = new Date(date);
+						var MensajeRecuperado = " ["+fecha.toLocaleString() +"] --> "+sender+": "+message+"<br>";					
+						prueba.innerHTML+= MensajeRecuperado;
 					}
-					// alert("Mensajes recuperados!!!!!!
-					// "+listaMensajes[0].message);
 
 				},
 				error : function(response) {

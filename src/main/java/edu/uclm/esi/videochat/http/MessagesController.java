@@ -3,6 +3,7 @@ package edu.uclm.esi.videochat.http;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -101,15 +102,13 @@ public class MessagesController {
 		String recipient = jso.getString("recipient");
 
 		List<Message> msg = msgRepo.findByRecipientAndSenderOrderByDate(recipient, sender);
-		
-//    	Message msg = new Message();
-//    	msg.setSender(sender);
-//    	msg.setRecipient(recipient);
-   	
-
+		 msg.addAll(msgRepo.findByRecipientAndSenderOrderByDate(sender, recipient));
+		 
 		return msg;
 	}
 	
+	
+
 	
 //	@GetMapping(value = "/getHistorial")
 //	public Message getHistorial(HttpServletRequest request, @RequestBody Map<String, Object> mensaje) throws Exception {
