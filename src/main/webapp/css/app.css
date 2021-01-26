@@ -52,5 +52,26 @@
 
 .textAreaMio{
 	resize: none;
-	
+}
+
+.resaltado:hoover{
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.user{
+	font-weight: bold;
+}
+
+.login{
+	margin-top: 8px; 
+	margin-bottom: 30px;
+}
+
+.boton{
+	background-color: #c2ff99;
+	text-align: center;
+	border-radius: 12px;
+	font-weight: bold;
+	font-size: 15px;
+
 }

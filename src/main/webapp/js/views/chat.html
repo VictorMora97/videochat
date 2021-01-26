@@ -1,6 +1,8 @@
 <div class="oj-hybrid-applayout-page fondo">
 	<div class="oj-applayout-fixed-top">
 		<header role="banner" class="oj-hybrid-applayout-header">
+		
+		
 			<oj-module config="[[headerConfig]]"></oj-module>
 		</header>
 	</div>
@@ -45,14 +47,14 @@
 						<!-- ko foreach : usuarios -->
 						<div>
 							<!-- ko if : foto -->
-							<img data-bind="attr : { src : foto }" width="30" height="30">
+							<img data-bind="attr : { src : foto }" width="35" height="35">
 							<!-- /ko -->
-							<a
+							<a class="user" 
 								data-bind="html : nombre, click : function() { $parent.setDestinatario($data); }"></a>
-							<button
+							<button class="boton" 
 								data-bind="click : function() { $parents[$parents.length-1].enviarOferta($data); }">Llamar</button>
 
-							<button
+							<button class="boton"  
 								data-bind="click : function() { $parent.recuperarChat($data); }">Historial</button>
 
 						</div>
@@ -72,7 +74,7 @@
 
 						<input type="text" size="50"
 							data-bind="value : mensajeQueVoyAEnviar">
-						<button data-bind="click : enviarATodos">Enviar mensaje a
+						<button class="boton" data-bind="click : enviarATodos">Enviar mensaje a
 							todos</button>
 						<br>
 					</div>
@@ -85,11 +87,11 @@
 						<!-- ko foreach : conversaciones -->
 						<div data-bind="visible : visible">
 							<!-- ko with : nombreInterlocutor -->
-							Chat con <span data-bind="html : $data"></span>
+							Chat con <span class="user" data-bind="html : $data"></span>
 							<!-- /ko -->
 							<input type="text" data-bind="value : textoAEnviar"
 								placeholder="Texto de tu mensaje">
-							<button data-bind="click : enviar">Enviar</button>
+							<button class="boton" data-bind="click : enviar">Enviar</button>
 
 							<!-- ko foreach : mensajes -->
 							<div>
@@ -136,8 +138,6 @@
 						<!-- /ko -->
 
 					</div>
-
-
 
 				</div>
 				<!-- /ko -->
