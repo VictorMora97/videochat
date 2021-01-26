@@ -48,8 +48,6 @@ public class RegistrarLoginTest {
 	private WebDriver chromeAna;
 	private WebDriver chromeLucas;
 	private WebDriver chromePepe;
-	private Map<String, Object> vars;
-	JavascriptExecutor js;
 
 	@Autowired
 	UserRepository usersRepo;
@@ -57,7 +55,6 @@ public class RegistrarLoginTest {
 	@Before
 	public void setUp() {
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\CLASE\\Desktop\\TSW\\chromedriver.exe");
-		vars = new HashMap<String, Object>();
 	}
 
 	@Test
@@ -67,11 +64,7 @@ public class RegistrarLoginTest {
 			usersRepo.deleteById(usersRepo.findByName("PepeSelenium").get().getId());
 		}
 
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("use-fake-ui-for-media-stream");
-		options.addArguments("--use-fake-device-for-media-stream");
-
-		chromePepe = new ChromeDriver(options);
+		chromePepe = new ChromeDriver();
 
 		chromePepe.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		chromePepe.get("https://localhost:7500/?ojr=register");
@@ -88,15 +81,16 @@ public class RegistrarLoginTest {
 				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[3]"));
 		WebElement cajaPwd2 = chromePepe
 				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[4]"));
+		WebElement botonCrearCuenta = chromePepe.findElement(By.id("btnCrearCuenta"));
 
 		cajaNombre.sendKeys("PepeSelenium");
 		cajaEmail.sendKeys("PepeSelenium@gmail.com");
 		cajaPwd1.sendKeys("123");
 		cajaPwd2.sendKeys("123");
-		chromePepe.findElement(By.xpath("/html/body/div/oj-module/div[1]/div[2]/div/div/div/button")).click();
-		WebElement botonCrearCuenta = chromePepe.findElement(By.id("btnCrearCuenta"));
 
-		new WebDriverWait(chromePepe, 60).ignoring(NoAlertPresentException.class)
+		botonCrearCuenta.click();
+
+		new WebDriverWait(chromePepe, 10).ignoring(NoAlertPresentException.class)
 				.until(ExpectedConditions.alertIsPresent());
 
 		assertThat(chromePepe.switchTo().alert().getText(), is("Registrado correctamente"));
@@ -118,21 +112,13 @@ public class RegistrarLoginTest {
 		loginPwd.sendKeys("123");
 
 		btnEntrar.click();
+		
 		chromePepe.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-
 		WebElement titulo = chromePepe.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/h1"));
-
-		chromePepe.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		
-//		if(titulo.getText()=="Login") {
-//			chromePepe.navigate().refresh();
-//		}
 		
 		chromePepe.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		
 		assertThat(titulo.getText(), is("Fantastico videochat"));
 
-		
 		chromePepe.quit();
 	}
 
@@ -143,11 +129,7 @@ public class RegistrarLoginTest {
 			usersRepo.deleteById(usersRepo.findByName("AnaSelenium").get().getId());
 		}
 
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("use-fake-ui-for-media-stream");
-		options.addArguments("--use-fake-device-for-media-stream");
-
-		chromeAna = new ChromeDriver(options);
+		chromeAna = new ChromeDriver();
 
 		chromeAna.get("https://localhost:7500/?ojr=register");
 
@@ -163,15 +145,16 @@ public class RegistrarLoginTest {
 				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[3]"));
 		WebElement cajaPwd2 = chromeAna
 				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[4]"));
+		WebElement botonCrearCuenta = chromeAna.findElement(By.id("btnCrearCuenta"));
 
 		cajaNombre.sendKeys("AnaSelenium");
 		cajaEmail.sendKeys("AnaSelenium@gmail.com");
 		cajaPwd1.sendKeys("123");
 		cajaPwd2.sendKeys("123");
-		chromeAna.findElement(By.xpath("/html/body/div/oj-module/div[1]/div[2]/div/div/div/button")).click();
-		WebElement botonCrearCuenta = chromeAna.findElement(By.id("btnCrearCuenta"));
 
-		new WebDriverWait(chromeAna, 60).ignoring(NoAlertPresentException.class)
+		botonCrearCuenta.click();
+
+		new WebDriverWait(chromeAna, 10).ignoring(NoAlertPresentException.class)
 				.until(ExpectedConditions.alertIsPresent());
 
 		assertThat(chromeAna.switchTo().alert().getText(), is("Registrado correctamente"));
@@ -209,10 +192,7 @@ public class RegistrarLoginTest {
 			usersRepo.deleteById(usersRepo.findByName("LucasSelenium").get().getId());
 		}
 
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("use-fake-ui-for-media-stream");
-		options.addArguments("--use-fake-device-for-media-stream");
-		chromeLucas = new ChromeDriver(options);
+		chromeLucas = new ChromeDriver();
 
 		chromeLucas.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		chromeLucas.get("https://localhost:7500/?ojr=register");
@@ -229,16 +209,16 @@ public class RegistrarLoginTest {
 				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[3]"));
 		WebElement cajaPwd2 = chromeLucas
 				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[4]"));
+		WebElement botonCrearCuenta = chromeLucas.findElement(By.id("btnCrearCuenta"));
 
 		cajaNombre.sendKeys("LucasSelenium");
 		cajaEmail.sendKeys("LucasSelenium@gmail.com");
 		cajaPwd1.sendKeys("123");
 		cajaPwd2.sendKeys("123");
 
-		chromeLucas.findElement(By.xpath("/html/body/div/oj-module/div[1]/div[2]/div/div/div/button")).click();
-		WebElement botonCrearCuenta = chromeLucas.findElement(By.id("btnCrearCuenta"));
+		botonCrearCuenta.click();
 
-		new WebDriverWait(chromeLucas, 60).ignoring(NoAlertPresentException.class)
+		new WebDriverWait(chromeLucas, 10).ignoring(NoAlertPresentException.class)
 				.until(ExpectedConditions.alertIsPresent());
 
 		assertThat(chromeLucas.switchTo().alert().getText(), is("Registrado correctamente"));
@@ -351,13 +331,13 @@ public class RegistrarLoginTest {
 
 		// ANA RECHAZA A PEPE
 			
-		new WebDriverWait(chromeAna, 60).ignoring(NoAlertPresentException.class)
+		new WebDriverWait(chromeAna, 10).ignoring(NoAlertPresentException.class)
 		.until(ExpectedConditions.alertIsPresent());
 		
 		assertThat(chromeAna.switchTo().alert().getText(), is("Te llama PepeSelenium. ¿Contestar?\n"));
 		chromeAna.switchTo().alert().dismiss();
 		
-		new WebDriverWait(chromePepe, 60).ignoring(NoAlertPresentException.class)
+		new WebDriverWait(chromePepe, 10).ignoring(NoAlertPresentException.class)
 		.until(ExpectedConditions.alertIsPresent());
 		
     	assertThat(chromePepe.switchTo().alert().getText(), is("AnaSelenium ha rechazado la llamada"));
@@ -371,7 +351,7 @@ public class RegistrarLoginTest {
 		
 		// LUCAS ACEPTA
 		
-		new WebDriverWait(chromeLucas, 60).ignoring(NoAlertPresentException.class)
+		new WebDriverWait(chromeLucas, 10).ignoring(NoAlertPresentException.class)
 		.until(ExpectedConditions.alertIsPresent());
 		
 		assertThat(chromeLucas.switchTo().alert().getText(), is("Te llama AnaSelenium. ¿Contestar?\n"));
@@ -386,11 +366,11 @@ public class RegistrarLoginTest {
 		chromeLucas.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		chromeAna.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
-		if(videoAna.isEnabled() && videoLucas.isEnabled()) {
-			//chromeAna.quit();
-			//chromeLucas.quit();
-			//chromePepe.quit();
-		}
+//		if(videoAna.isEnabled() && videoLucas.isEnabled()) {
+//			chromeAna.quit();
+//			chromeLucas.quit();
+//			chromePepe.quit();
+//		}
 
 		assertThat(videoAna.isEnabled(), is(true));
 		assertThat(videoLucas.isEnabled(), is(true));
