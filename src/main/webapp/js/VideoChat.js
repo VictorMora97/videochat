@@ -11,6 +11,9 @@ class VideoChat {
 		this.error = ko.observable();
 		
 		var zonaVideo = document.getElementById("zonaVideo");
+		var bntLlamar = document.getElementById("btnLlamar");
+		var bntColgar = document.getElementById("btnColgar");
+		var bntHistorial = document.getElementById("btnHistorial");
 		
 		this.ws = new WebSocket("wss://" + window.location.host + "/wsSignaling");
 		
@@ -64,20 +67,23 @@ class VideoChat {
 				self.addMensaje("sessionDescription añadida a la remoteDescription", "orange");
 				return;
 			}
-		}
+		}	
+		
 	}
 	
 	anunciarLlamada(remitente, sessionDescription) {
 		this.addMensaje("Se recibe llamada de " + remitente + " con su sessionDescription", "black");
 		let aceptar = window.confirm("Te llama " + remitente + ". ¿Contestar?\n");
-		if (aceptar)
+		if (aceptar){
 			this.aceptarLlamada(remitente, sessionDescription);
-		else
+		}else{
 			this.enviarRechazo(remitente, sessionDescription);			
+		}
 	}
 	
 	anunciarRechazo(remitente, sessionDescription) {
 		this.addMensaje(remitente + " ha rechazado la llamada", "black");
+		this.conexion.close();
 		zonaVideo.style.display = 'none';
 		window.alert(remitente+" ha rechazado la llamada");
 	}
@@ -107,22 +113,22 @@ class VideoChat {
 					recipient : remitente
 				};
 				self.ws.send(JSON.stringify(msg));
-				self.addMensaje("Oferta enviada al servidor de signaling");
 			},
 			function(error) {
-				self.addMensaje("Error al crear oferta en el servidor Stun", true);
+				self.addMensaje("Error en el rechazo");
 			},
 			sdpConstraints
 			
 		);
 		
 		},2000);
-		
-		
 	}
 	
 	
-	
+	colgar(){
+		zonaVideo.style.display = 'none';
+		this.conexion.close();
+	}
 	
 	aceptarLlamada(remitente, sessionDescription) {
 		zonaVideo.style.display = 'block';
@@ -164,7 +170,7 @@ class VideoChat {
 			},
 			sdpConstraints
 		);  
-			},2000);	
+			},2000);			
 	}
 	
 
@@ -210,6 +216,7 @@ class VideoChat {
 	}
 	
 	crearConexion() {
+		
 		let self = this;
 		let servers = { 
 			iceServers : [ 
@@ -283,7 +290,6 @@ class VideoChat {
 		let self = this;
 		let sdpConstraints = {};
 		
-		// self.zonaVideo = ko.observable(true);
 		self.encenderVideoLocal();
 		// self.addMensaje("CONTROL DE MENSAJES1");
 		
@@ -313,7 +319,7 @@ class VideoChat {
 		);
 		
 		
-		},2000);
+		},3000);
 		
 		
 	}

@@ -1,8 +1,8 @@
 <div class="oj-hybrid-applayout-page fondo">
 	<div class="oj-applayout-fixed-top">
 		<header role="banner" class="oj-hybrid-applayout-header">
-		
-		
+
+
 			<oj-module config="[[headerConfig]]"></oj-module>
 		</header>
 	</div>
@@ -49,13 +49,17 @@
 							<!-- ko if : foto -->
 							<img data-bind="attr : { src : foto }" width="35" height="35">
 							<!-- /ko -->
-							<a class="user" 
+							<a class="user"
 								data-bind="html : nombre, click : function() { $parent.setDestinatario($data); }"></a>
-							<button class="boton" 
+
+							<button class="boton" id="btnLlamar"
 								data-bind="click : function() { $parents[$parents.length-1].enviarOferta($data); }">Llamar</button>
 
-							<button class="boton"  
+							<button class="boton" id="btnHistorial"
 								data-bind="click : function() { $parent.recuperarChat($data); }">Historial</button>
+
+
+
 
 						</div>
 						<!-- /ko -->
@@ -74,8 +78,8 @@
 
 						<input type="text" size="50"
 							data-bind="value : mensajeQueVoyAEnviar">
-						<button class="boton" data-bind="click : enviarATodos">Enviar mensaje a
-							todos</button>
+						<button class="boton" data-bind="click : enviarATodos">Enviar
+							mensaje a todos</button>
 						<br>
 					</div>
 
@@ -95,8 +99,8 @@
 
 							<!-- ko foreach : mensajes -->
 							<div>
-								<strong> <span data-bind="html : $data.horaFormateada"></span>: </strong><span
-									data-bind="html : $data.texto"></span>
+								<strong> <span data-bind="html : $data.horaFormateada"></span>:
+								</strong><span data-bind="html : $data.texto"></span>
 							</div>
 							<!-- /ko -->
 						</div>
@@ -116,14 +120,22 @@
 
 
 					<div class="oj-sm-4" style="display: none;" id="zonaVideo">
-						<h4 class="relieveTexto">Zona de video</h4>
+
+						<!-- ko with : $parents[$parents.length-1].videoChat -->
+						<div>
+							<h4 class="relieveTexto">Zona de video</h4>
+							<button class="botonColgar" id="btnColgar"
+								data-bind="click : colgar">Colgar</button>
+						</div>
+						
+
 						<video id="widgetVideoLocal" playsinline autoplay controls mute
 							width="200" height="200"></video>
 						<video id="widgetVideoRemoto" playsinline autoplay controls
 							width="200" height="200"></video>
-						<!-- 							<div>
-							<button data-bind="click : acabarLlamada()">Finalizar llamada</button>	
-							</div> -->
+							
+							<!-- /ko -->
+							
 					</div>
 
 
