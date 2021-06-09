@@ -19,4 +19,10 @@ public interface MessageRepository extends CrudRepository <Message, String> {
 	//public Message findBySender(String sender);
 	public List<Message> findByRecipientAndSenderOrderByDate(String recipient, String sender);
 	//public Message findByRecipientAndSender(String recipient, String sender);
+	
+	
+
+	
+	
+	
 }

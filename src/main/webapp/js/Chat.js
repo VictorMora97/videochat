@@ -18,6 +18,8 @@ class Chat {
 		var zonaVideo = document.getElementById("zonaVideo");
 		var zonaHistorial = document.getElementById("zonaHistorial");
 		
+
+		
 		this.chat = new WebSocket("wss://" + window.location.host + "/wsTexto");
 		
 		this.chat.onopen = function() {
@@ -88,11 +90,11 @@ class Chat {
 		this.chat.close();
 	}
 	
-// acabarLlamada(){
-//		
-// zonaVideo.style.display = 'none';
-// }
-//	
+ acabarLlamada(){
+		
+ zonaVideo.style.display = 'none';
+ }
+	
 	
 	enviar(mensaje) {
 		this.chat.send(JSON.stringify(mensaje));
@@ -143,7 +145,36 @@ class Chat {
 		}
 		this.ponerVisible(interlocutor.nombre);
 	}
+	
+	
+	
+	
+	
+	
+	
+	//Nueva función eliminar mensajes
 
+	eliminarChat(interlocutor){
+		zonaHistorial.style.display = 'none';
+		var info = {
+				sender : document.getElementById("yo").innerHTML,
+				recipient : interlocutor.nombre
+		};
+		var data = {
+				data : JSON.stringify(info),
+				url : "messages/deleteHistorial",
+				type : "post",
+				contentType : 'application/json',
+				success : function(response) {			
+				alert("Historial con "+interlocutor.name+" eliminado");
+				},
+				error : function(response) {
+					alert("Error recuperando msg " + response);
+				}
+		};
+		$.ajax(data); 
+		
+	}
 
 	recuperarChat(interlocutor){
 //		if(zonaHistorial.style.display == 'none'){

@@ -95,6 +95,7 @@ public class MessagesController {
 	
 	
 	
+	
 	@PostMapping(value = "/getHistorial")
 	public List<Message> getHistorial(HttpServletRequest request, @RequestBody Map<String, Object> credenciales) throws Exception {
 		JSONObject jso = new JSONObject(credenciales);
@@ -105,6 +106,22 @@ public class MessagesController {
 		 msg.addAll(msgRepo.findByRecipientAndSenderOrderByDate(sender, recipient));
 		 
 		return msg;
+	}
+	
+	@PostMapping(value = "/deleteHistorial")
+	public void deleteHistorial(HttpServletRequest request, @RequestBody Map<String, Object> credenciales) throws Exception {
+		JSONObject jso = new JSONObject(credenciales);
+		String sender = jso.getString("sender");
+		String recipient = jso.getString("recipient");
+
+		List<Message> msg = msgRepo.findByRecipientAndSenderOrderByDate(recipient, sender);
+		 msg.addAll(msgRepo.findByRecipientAndSenderOrderByDate(sender, recipient));
+		 
+		 for(int i = 0;i<msg.size();i++) {
+			 msgRepo.delete(msg.get(i));
+		 }
+		 
+		//return msg;
 	}
 	
 	
