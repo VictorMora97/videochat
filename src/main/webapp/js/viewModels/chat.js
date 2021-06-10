@@ -11,8 +11,7 @@ define(
 
 				self.chat = ko.observable(new Chat(ko));
 
-				self.videoChat = ko.observable(new VideoChat(ko));	
-				
+				self.videoChat = ko.observable(new VideoChat(ko));
 
 				self.estadoChatDeTexto = self.chat().estado;
 				self.estadoSignaling = self.videoChat().estado;
@@ -40,16 +39,37 @@ define(
 					getUsuariosConectados();
 				};
 
+				function getAvatar(name, listSize) {
+					var data = {
+						url : "users/getAvatar/" + name,
+						type : "get",
+						contentType : 'application/json',
+						success : function(response) {
+							self.chat().addAvatar(name, response.responseText,
+									listSize);
+							//return response;
+						},
+						error : function(response) {
+							self.chat().addAvatar(name, response.responseText,
+									listSize);
+							//self.error(response.responseJSON.error);
+						}
+					};
+					$.ajax(data);
+				}
+
 				function getUsuariosConectados() {
 					var data = {
 						url : "users/getUsuariosConectados",
 						type : "get",
 						contentType : 'application/json',
 						success : function(response) {
+							var listSize = response.length;
 							for (var i = 0; i < response.length; i++) {
-								var userName = response[i].name;
-								var picture = response[i].picture;
-								self.chat().addUsuario(userName, picture);
+								var userName = response[i];
+								self.chat().addUsuario(userName, "");
+								getAvatar(userName, listSize);
+
 							}
 						},
 						error : function(response) {

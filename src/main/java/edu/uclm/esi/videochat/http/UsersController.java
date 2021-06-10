@@ -115,10 +115,23 @@ public class UsersController {
 			throw new Exception("Credenciales inválidas");
 	}
 	
+	
+	@GetMapping(value = "/getUsuariosConectados", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<String> getUsuariosConectados() {
+		return Manager.get().getUsuariosConectados();
+	}
+	
+	@GetMapping(value = "/getAvatar/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public String getAvatar(@PathVariable String name) {
+		return Manager.get().getAvatar(name);
+	}
+	
+	
+	
+	/*
 	@GetMapping(value = "/getUsuariosConectados", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<User> getUsuariosConectados() {
 		return Manager.get().getUsuariosConectados();
 	}
-	
-	
+	*/
 }

@@ -136,7 +136,11 @@ public class RegistrarLoginTest {
 		chromeAna.findElement(By.id("details-button")).click();
 		chromeAna.findElement(By.id("proceed-link")).click();
 		chromeAna.manage().window().setSize(new Dimension(939, 1025));
-
+		
+		
+		chromeAna.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		
+		
 		WebElement cajaNombre = chromeAna
 				.findElement(By.xpath("//*[@id=\"globalBody\"]/oj-module/div[1]/div[2]/div/div/div/input[1]"));
 		WebElement cajaEmail = chromeAna

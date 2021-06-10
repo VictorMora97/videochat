@@ -152,7 +152,7 @@ class Chat {
 	
 	
 	
-	//Nueva función eliminar mensajes
+	// Nueva función eliminar mensajes
 
 	eliminarChat(interlocutor){
 		zonaHistorial.style.display = 'none';
@@ -166,7 +166,7 @@ class Chat {
 				type : "post",
 				contentType : 'application/json',
 				success : function(response) {			
-				alert("Historial con "+interlocutor.name+" eliminado");
+				alert("Historial eliminado");
 				},
 				error : function(response) {
 					alert("Error recuperando msg " + response);
@@ -177,11 +177,11 @@ class Chat {
 	}
 
 	recuperarChat(interlocutor){
-//		if(zonaHistorial.style.display == 'none'){
+// if(zonaHistorial.style.display == 'none'){
 			zonaHistorial.style.display = 'block';
-//		} else {
-//			zonaHistorial.style.display = 'none';
-//		}
+// } else {
+// zonaHistorial.style.display = 'none';
+// }
 		
 		var listaMensajes = [];
 		var prueba = document.getElementById("recuperado");
@@ -239,6 +239,21 @@ class Chat {
 			var conversacion = this.conversaciones()[i];
 			conversacion.visible(conversacion.nombreInterlocutor == nombreInterlocutor);
 		}
+	}
+	
+	addAvatar(userName, picture,listSize){
+		
+		for(var i=0; i<listSize; i++){
+			var userNow = this.usuarios.pop();
+			if(userNow.nombre!=userName){
+				this.usuarios.unshift(new Usuario(userNow.nombre, userNow.foto));
+				
+			}else{
+				this.usuarios.unshift(new Usuario(userNow.nombre, picture));
+			}
+		}
+		
+
 	}
 	
 	addUsuario(userName, picture) {
